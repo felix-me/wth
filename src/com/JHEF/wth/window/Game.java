@@ -1,6 +1,7 @@
 package com.JHEF.wth.window;
 
 import com.JHEF.wth.framework.GameObject;
+import com.JHEF.wth.objects.Test;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -15,6 +16,14 @@ public class Game extends Canvas implements Runnable {
 
     private boolean running = false;
     private Thread thread;
+
+    // Object
+    Handler handler;
+
+    private void init()
+    {
+        handler = new Handler();
+    }
 
     /**
      * Handles all instances when game is started.
@@ -39,6 +48,8 @@ public class Game extends Canvas implements Runnable {
      */
     public void run()
     {
+        init();
+        this.requestFocus();
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0; // FPS
         double ns = 1000000000 / amountOfTicks;
@@ -75,7 +86,7 @@ public class Game extends Canvas implements Runnable {
      */
     public void tick()
     {
-
+        handler.tick();
     }
 
     /**
@@ -96,11 +107,15 @@ public class Game extends Canvas implements Runnable {
         }
 
         Graphics g = bs.getDrawGraphics();
+        ////////////////////////////////////////////
         // Draw game here
 
         g.setColor(Color.black);
         g.fillRect(0, 0, getWidth(), getHeight()); // Stop flickering
+        handler.render(g);
 
+        // End of game draw
+        ////////////////////////////////////////////
 
         g.dispose();
         bs.show();
