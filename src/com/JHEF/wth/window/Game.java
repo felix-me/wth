@@ -1,5 +1,7 @@
 package com.JHEF.wth.window;
 
+import com.JHEF.wth.framework.GameObject;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 

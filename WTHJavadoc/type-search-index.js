@@ -1,1 +1,1 @@
-typeSearchIndex = [{"p":"com.JHEF.wth.window","l":"Game"},{"p":"com.JHEF.wth.window","l":"Window"}]
+typeSearchIndex = [{"p":"com.JHEF.wth.window","l":"Game"},{"p":"com.JHEF.wth.framework","l":"GameObject"},{"p":"com.JHEF.wth.framework","l":"ObjectId"},{"p":"com.JHEF.wth.objects","l":"Test"},{"p":"com.JHEF.wth.window","l":"Window"}]
