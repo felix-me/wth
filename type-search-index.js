@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"com.JHEF.wth.window","l":"Game"},{"p":"com.JHEF.wth.window","l":"Window"}]
