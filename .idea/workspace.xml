@@ -3,9 +3,65 @@
   <component name="ChangeListManager">
     <list default="true" id="a3102e4c-b36b-4b8a-a19a-f560c0fcd80f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/allclasses-frame.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/allclasses-noframe.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/com/JHEF/wth/window/Game.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/com/JHEF/wth/window/Window.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/com/JHEF/wth/window/package-frame.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/com/JHEF/wth/window/package-summary.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/com/JHEF/wth/window/package-tree.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/constant-values.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/deprecated-list.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/help-doc.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/index-files/index-1.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/index-files/index-2.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/index-files/index-3.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/index-files/index-4.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/index-files/index-5.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/index-files/index-6.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/index.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/external/jquery/jquery.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-bg_flat_0_aaaaaa_40x100.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-bg_flat_75_ffffff_40x100.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-bg_glass_55_fbf9ee_1x400.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-bg_glass_65_ffffff_1x400.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-bg_glass_75_dadada_1x400.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-bg_glass_75_e6e6e6_1x400.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-bg_glass_95_fef1ec_1x400.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-bg_highlight-soft_75_cccccc_1x100.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-icons_222222_256x240.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-icons_2e83ff_256x240.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-icons_454545_256x240.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-icons_888888_256x240.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/images/ui-icons_cd0a0a_256x240.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jquery-1.10.2.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jquery-ui.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jquery-ui.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jquery-ui.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jquery-ui.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jquery-ui.structure.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jquery-ui.structure.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jszip-utils/dist/jszip-utils-ie.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jszip-utils/dist/jszip-utils-ie.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jszip-utils/dist/jszip-utils.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jszip-utils/dist/jszip-utils.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jszip/dist/jszip.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jquery/jszip/dist/jszip.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/member-search-index.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/member-search-index.zip" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/overview-tree.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/package-list" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/package-search-index.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/package-search-index.zip" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/resources/glass.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/resources/x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/script.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/search.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/serialized-form.html" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/com/JHEF/wth/window/Game.java" afterPath="$PROJECT_DIR$/src/com/JHEF/wth/window/Game.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/JHEF/wth/window/Window.java" afterPath="$PROJECT_DIR$/src/com/JHEF/wth/window/Window.java" />
+      <change beforePath="$PROJECT_DIR$/stylesheet.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/type-search-index.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/type-search-index.zip" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,13 +86,12 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/JHEF/wth/window/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="43" column="45" lean-forward="false" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
+            <state relative-caret-position="129">
+              <caret line="83" column="51" lean-forward="false" selection-start-line="83" selection-start-column="51" selection-end-line="83" selection-end-column="51" />
               <folding>
-                <element signature="e#764#765#0" expanded="true" />
-                <element signature="e#818#819#0" expanded="true" />
-                <element signature="e#966#967#0" expanded="true" />
-                <element signature="e#1033#1034#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#2570#2571#0" expanded="true" />
+                <element signature="e#2637#2638#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -253,7 +308,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -268,7 +322,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -301,13 +355,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/JHEF/wth/window/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="43" column="45" lean-forward="false" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
+        <state relative-caret-position="129">
+          <caret line="83" column="51" lean-forward="false" selection-start-line="83" selection-start-column="51" selection-end-line="83" selection-end-column="51" />
           <folding>
-            <element signature="e#764#765#0" expanded="true" />
-            <element signature="e#818#819#0" expanded="true" />
-            <element signature="e#966#967#0" expanded="true" />
-            <element signature="e#1033#1034#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#2570#2571#0" expanded="true" />
+            <element signature="e#2637#2638#0" expanded="true" />
           </folding>
         </state>
       </provider>
