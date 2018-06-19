@@ -1,7 +1,8 @@
 package com.JHEF.wth.window;
 
-import com.JHEF.wth.framework.GameObject;
-import com.JHEF.wth.objects.Test;
+import com.JHEF.wth.framework.KeyInput;
+import com.JHEF.wth.framework.ObjectId;
+import com.JHEF.wth.objects.Player;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -17,12 +18,24 @@ public class Game extends Canvas implements Runnable {
     private boolean running = false;
     private Thread thread;
 
+    public static int WIDTH, HEIGHT;
+
     // Object
     Handler handler;
 
     private void init()
     {
+
+        WIDTH = getWidth();
+        HEIGHT = getHeight();
+
         handler = new Handler();
+
+        handler.addObject(new Player(100, 100, handler, ObjectId.player));
+
+        handler.createLevel();
+
+        this.addKeyListener(new KeyInput(handler));
     }
 
     /**
