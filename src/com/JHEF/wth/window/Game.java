@@ -2,10 +2,12 @@ package com.JHEF.wth.window;
 
 import com.JHEF.wth.framework.KeyInput;
 import com.JHEF.wth.framework.ObjectId;
+import com.JHEF.wth.objects.Block;
 import com.JHEF.wth.objects.Player;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 /**
  * @author WTH
@@ -20,6 +22,9 @@ public class Game extends Canvas implements Runnable {
 
     public static int WIDTH, HEIGHT;
 
+    private BufferedImage level = null;
+
+
     // Object
     Handler handler;
     Camera cam;
@@ -30,15 +35,48 @@ public class Game extends Canvas implements Runnable {
         WIDTH = getWidth();
         HEIGHT = getHeight();
 
+        BufferedImageLoader loader = new BufferedImageLoader();
+        level = loader.loadImage("/hellsquare.png");
+
         handler = new Handler();
 
         cam = new Camera(0,0);
 
-        handler.addObject(new Player(100, 100, handler, ObjectId.player));
+        loadImageLevel(level);
 
-        handler.createLevel();
+        //handler.addObject(new Player(100, 100, handler, ObjectId.player));
+
+        //handler.createLevel();
 
         this.addKeyListener(new KeyInput(handler));
+    }
+
+    private void loadImageLevel(BufferedImage image){
+
+        int h = image.getHeight();
+        int w = image.getWidth();
+
+        System.out.println(h);
+        System.out.println(w);
+
+        for(int xx = 0; xx < h; xx++) {
+            for(int yy = 0; yy < w; yy++) {
+                System.out.println(xx);
+                System.out.println(yy);
+                int pixel = image.getRGB(xx,yy);
+                int red = (pixel >> 16) & 0xff;
+                int green = (pixel >> 8) & 0xff;
+                int blue = (pixel) & 0xff;
+
+                if(red != 255 || green != 255 || blue != 255) {
+                    handler.addObject(new Block(xx*32,yy*32,ObjectId.block));
+                }
+                if(red == 0 && green == 0 && blue == 0) {
+                    handler.addObject(new Player(xx*32,yy*32,handler,ObjectId.player));
+                }
+            }
+        }
+
     }
 
     /**
