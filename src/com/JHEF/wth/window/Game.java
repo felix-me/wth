@@ -22,6 +22,7 @@ public class Game extends Canvas implements Runnable {
 
     // Object
     Handler handler;
+    Camera cam;
 
     private void init()
     {
@@ -30,6 +31,8 @@ public class Game extends Canvas implements Runnable {
         HEIGHT = getHeight();
 
         handler = new Handler();
+
+        cam = new Camera(0,0);
 
         handler.addObject(new Player(100, 100, handler, ObjectId.player));
 
@@ -100,6 +103,11 @@ public class Game extends Canvas implements Runnable {
     public void tick()
     {
         handler.tick();
+        for(int i = 0; i < handler.object.size(); i++) {
+            if(handler.object.get(i).getId() == ObjectId.player) {
+                cam.tick(handler.object.get(i));
+            }
+        }
     }
 
     /**
@@ -120,12 +128,19 @@ public class Game extends Canvas implements Runnable {
         }
 
         Graphics g = bs.getDrawGraphics();
+        Graphics2D g2d = (Graphics2D) g;
         ////////////////////////////////////////////
+
         // Draw game here
 
         g.setColor(Color.black);
         g.fillRect(0, 0, getWidth(), getHeight()); // Stop flickering
+
+        g2d.translate(cam.getX(),cam.getY()); //begin of cam
+
         handler.render(g);
+
+        g2d.translate(-cam.getX(),-cam.getY()); //end of cam
 
         // End of game draw
         ////////////////////////////////////////////
