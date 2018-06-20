@@ -2,6 +2,7 @@ package com.JHEF.wth.window;
 
 import com.JHEF.wth.framework.KeyInput;
 import com.JHEF.wth.framework.ObjectId;
+import com.JHEF.wth.framework.Texture;
 import com.JHEF.wth.objects.Block;
 import com.JHEF.wth.objects.Player;
 
@@ -28,6 +29,7 @@ public class Game extends Canvas implements Runnable {
     // Object
     Handler handler;
     Camera cam;
+    static Texture tex;
 
     private void init()
     {
@@ -35,8 +37,10 @@ public class Game extends Canvas implements Runnable {
         WIDTH = getWidth();
         HEIGHT = getHeight();
 
+        tex = new Texture();
+
         BufferedImageLoader loader = new BufferedImageLoader();
-        level = loader.loadImage("/hellsquare.png");
+        level = loader.loadImage("/hell.png");
 
         handler = new Handler();
 
@@ -68,8 +72,71 @@ public class Game extends Canvas implements Runnable {
                 int green = (pixel >> 8) & 0xff;
                 int blue = (pixel) & 0xff;
 
-                if(red != 255 || green != 255 || blue != 255) {
-                    handler.addObject(new Block(xx*32,yy*32,ObjectId.block));
+                if(red == 100 && green == 0 && blue == 0) {
+                    handler.addObject(new Block(xx*32,yy*32,0,ObjectId.block));
+                }
+                if(red == 255 && green == 0 && blue == 0) {
+                    handler.addObject(new Block(xx*32,yy*32,1,ObjectId.block));
+                }
+                if(red == 200 && green == 0 && blue == 0) {
+                    handler.addObject(new Block(xx*32,yy*32,2,ObjectId.block));
+                }
+                if(red == 150 && green == 0 && blue == 0) {
+                    handler.addObject(new Block(xx*32,yy*32,3,ObjectId.block));
+                }
+                if(red == 50 && green == 0 && blue == 0) {
+                    handler.addObject(new Block(xx*32,yy*32,4,ObjectId.block));
+                }
+                if(red == 25 && green == 0 && blue == 0) {
+                    handler.addObject(new Block(xx*32,yy*32,5,ObjectId.block));
+                }
+                if(red == 0 && green == 0 && blue == 255) {
+                    handler.addObject(new Block(xx*32,yy*32,6,ObjectId.block));
+                }
+                if(red == 0 && green == 0 && blue == 200) {
+                    handler.addObject(new Block(xx*32,yy*32,7,ObjectId.block));
+                }
+                if(red == 0 && green == 0 && blue == 150) {
+                    handler.addObject(new Block(xx*32,yy*32,8,ObjectId.block));
+                }
+                if(red == 0 && green == 0 && blue == 100) {
+                    handler.addObject(new Block(xx*32,yy*32,9,ObjectId.block));
+                }
+                if(red == 0 && green == 255 && blue == 0) {
+                    handler.addObject(new Block(xx*32,yy*32,10,ObjectId.block));
+                }
+                if(red == 0 && green == 230 && blue == 0) {
+                    handler.addObject(new Block(xx*32,yy*32,11,ObjectId.block));
+                }
+                if(red == 0 && green == 210 && blue == 0) {
+                    handler.addObject(new Block(xx*32,yy*32,12,ObjectId.block));
+                }
+                if(red == 0 && green == 190 && blue == 0) {
+                    handler.addObject(new Block(xx*32,yy*32,13,ObjectId.block));
+                }
+                if(red == 0 && green == 170 && blue == 0) {
+                    handler.addObject(new Block(xx*32,yy*32,14,ObjectId.block));
+                }
+                if(red == 0 && green == 150 && blue == 0) {
+                    handler.addObject(new Block(xx*32,yy*32,15,ObjectId.block));
+                }
+                if(red == 255 && green == 0 && blue == 255) {
+                    handler.addObject(new Block(xx*32,yy*32,16,ObjectId.block));
+                }
+                if(red == 255 && green == 0 && blue == 200) {
+                    handler.addObject(new Block(xx*32,yy*32,17,ObjectId.block));
+                }
+                if(red == 255 && green == 0 && blue == 150) {
+                    handler.addObject(new Block(xx*32,yy*32,18,ObjectId.block));
+                }
+                if(red == 255 && green == 0 && blue == 100) {
+                    handler.addObject(new Block(xx*32,yy*32,19,ObjectId.block));
+                }
+                if(red == 255 && green == 0 && blue == 80) {
+                    handler.addObject(new Block(xx*32,yy*32,20,ObjectId.block));
+                }
+                if(red == 255 && green == 0 && blue == 60) {
+                    handler.addObject(new Block(xx*32,yy*32,21,ObjectId.block));
                 }
                 if(red == 0 && green == 0 && blue == 0) {
                     handler.addObject(new Player(xx*32,yy*32,handler,ObjectId.player));
@@ -185,6 +252,10 @@ public class Game extends Canvas implements Runnable {
 
         g.dispose();
         bs.show();
+    }
+
+    public static Texture getInstance() {
+        return tex;
     }
 
     /**

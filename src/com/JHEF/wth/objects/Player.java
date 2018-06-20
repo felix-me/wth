@@ -2,6 +2,8 @@ package com.JHEF.wth.objects;
 
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
+import com.JHEF.wth.framework.Texture;
+import com.JHEF.wth.window.Game;
 import com.JHEF.wth.window.Handler;
 
 import java.awt.*;
@@ -10,10 +12,12 @@ import java.util.LinkedList;
 public class Player extends GameObject {
 
     private float width = 32, height = 64;
-    private float gravity = 0.7f;
+    private float gravity = 0.62f;
     private final float MAX_SPEED = 7;
 
     private Handler handler;
+
+    Texture tex = Game.getInstance();
 
     /**
      * constructor for {@link GameObject}
@@ -80,16 +84,16 @@ public class Player extends GameObject {
 
     public void render(Graphics g) {
         g.setColor(Color.GREEN);
-        g.fillRect((int) x, (int) y, (int) width, (int) (height));
+        g.drawImage(tex.player[0],(int)x,(int)y,null);
 
-        Graphics2D g2d = (Graphics2D) g;
-
-        g.setColor(Color.RED);
-
-        g2d.draw(getBoundsBottom());
-        g2d.draw(getBoundsRight());
-        g2d.draw(getBoundsLeft());
-        g2d.draw(getBoundsTop());
+//        Graphics2D g2d = (Graphics2D) g;
+//
+//        g.setColor(Color.RED);
+//
+//        g2d.draw(getBoundsBottom());
+//        g2d.draw(getBoundsRight());
+//        g2d.draw(getBoundsLeft());
+//        g2d.draw(getBoundsTop());dw
 
     }
 
