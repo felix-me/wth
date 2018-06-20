@@ -7,6 +7,7 @@ import com.JHEF.wth.window.Game;
 import com.JHEF.wth.window.Handler;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Player extends GameObject {
@@ -16,6 +17,8 @@ public class Player extends GameObject {
     private final float MAX_SPEED = 7;
 
     private Handler handler;
+
+    private ArrayList<Integer> killBlocks = new ArrayList<>();
 
     Texture tex = Game.getInstance();
 
@@ -29,6 +32,10 @@ public class Player extends GameObject {
     public Player(float x, float y, Handler handler, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
+        killBlocks.add(6);
+        killBlocks.add(7);
+        killBlocks.add(8);
+        killBlocks.add(9);
     }
 
     public void tick(LinkedList<GameObject> object) {
@@ -46,6 +53,15 @@ public class Player extends GameObject {
         Collision(object);
     }
 
+    private void doesCollide(GameObject tempObject) {
+        if(tempObject instanceof Block) {
+            Block blockCollided = (Block) tempObject;
+            if(killBlocks.contains(((Block) tempObject).getType())) {
+                System.out.println("die");
+            }
+        }
+    }
+
     private void Collision(LinkedList<GameObject> object) {
 
         for (int i = 0; i < handler.object.size(); i++) {
@@ -57,6 +73,7 @@ public class Player extends GameObject {
                 if (getBoundsTop().intersects(tempObj.getBounds())) {
                     y = tempObj.getY()+9;
                     velY = 0;
+                    doesCollide(tempObj);
                 }
 
                 if (getBoundsBottom().intersects(tempObj.getBounds())) {
@@ -64,6 +81,7 @@ public class Player extends GameObject {
                     velY = 0;
                     falling = false;
                     jumping = false;
+                    doesCollide(tempObj);
                 }
                 else {
                     falling = true;
@@ -71,10 +89,12 @@ public class Player extends GameObject {
 
                 if (getBoundsRight().intersects(tempObj.getBounds())) {
                     x = tempObj.getX() - width;
+                    doesCollide(tempObj);
                 }
 
                 if (getBoundsLeft().intersects(tempObj.getBounds())) {
                     x = tempObj.getX() + width;
+                    doesCollide(tempObj);
                 }
             }
 
