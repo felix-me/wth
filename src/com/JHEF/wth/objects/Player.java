@@ -28,8 +28,6 @@ public class Player extends GameObject {
 
     private int powerUpRemaining = -1;
 
-    Texture tex = Game.getTexture();
-
     /**
      * constructor for {@link GameObject}
      *
@@ -129,27 +127,16 @@ public class Player extends GameObject {
     }
 
     public void render(Graphics g) {
-        g.setColor(Color.GREEN);
         if(velX != 0){
             playerWalk.drawAnimation(g,(int)x,(int)y);
         } else {
 
             g.drawImage(tex.player[0], (int) x, (int) y, null);
         }
-
-//        Graphics2D g2d = (Graphics2D) g;
-//
-//        g.setColor(Color.RED);
-//
-//        g2d.draw(getBoundsBottom());
-//        g2d.draw(getBoundsRight());
-//        g2d.draw(getBoundsLeft());
-//        g2d.draw(getBoundsTop());
-
     }
 
     public Rectangle getBounds() {
-        return null;
+        return new Rectangle((int)x,(int)y,(int)width,(int)height);
     }
 
     public Rectangle getBoundsBottom() {

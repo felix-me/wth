@@ -6,12 +6,14 @@ import java.awt.image.BufferedImage;
 
 public class Texture {
 
-    SpriteSheet bs, ps;
+    SpriteSheet bs, ps, is;
     private BufferedImage block_sheet = null;
     private BufferedImage player_sheet = null;
+    private BufferedImage imp_sheet = null;
 
     public BufferedImage[] block = new BufferedImage[23];
     public BufferedImage[] player = new BufferedImage[11];
+    public BufferedImage[] imp = new BufferedImage[50];
 
     public Texture() {
 
@@ -20,12 +22,14 @@ public class Texture {
         try {
             block_sheet = loader.loadImage("/WTH_TEXTURES.png");
             player_sheet = loader.loadImage("/ghosts.png");
+            imp_sheet = loader.loadImage("/imp.png");
         }catch(Exception e) {
             e.printStackTrace();
         }
 
         bs = new SpriteSheet(block_sheet);
         ps = new SpriteSheet(player_sheet);
+        is = new SpriteSheet(imp_sheet);
 
         getTextures();
 
@@ -68,6 +72,8 @@ public class Texture {
 
         player[9] = ps.grabImage(1,5,32,64);//player jump right
         player[10] = ps.grabImage(2,5,32,64);//player jump left
+
+        imp[0] = is.grabImage(2,1,32,32);//player jump left
 
 
     }

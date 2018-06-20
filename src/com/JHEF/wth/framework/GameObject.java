@@ -1,5 +1,7 @@
 package com.JHEF.wth.framework;
 
+import com.JHEF.wth.window.Game;
+
 import java.awt.*;
 import java.util.LinkedList;
 
@@ -13,6 +15,8 @@ public abstract class GameObject
     protected float velX = 0, velY = 0;
     protected boolean falling = true;
     protected boolean jumping = false;
+
+    public Texture tex = Game.getTexture();
 
     /**
      * constructor for {@link GameObject}

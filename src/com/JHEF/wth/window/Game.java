@@ -1,11 +1,8 @@
 package com.JHEF.wth.window;
 
-import com.JHEF.wth.framework.KeyInput;
-import com.JHEF.wth.framework.MouseInput;
-import com.JHEF.wth.framework.ObjectId;
-import com.JHEF.wth.framework.Texture;
+import com.JHEF.wth.framework.*;
 import com.JHEF.wth.objects.Block;
-import com.JHEF.wth.objects.Enemy;
+import com.JHEF.wth.objects.Imp;
 import com.JHEF.wth.objects.Player;
 
 import java.awt.*;
@@ -172,7 +169,7 @@ public class Game extends Canvas implements Runnable {
                     System.out.println("xx: "+xx*32+"yy: "+yy+32);
                 }
                 if(red == 255 && green == 100 && blue == 255) {
-                    handler.addObject(new Enemy(xx*32,yy*32,handler,ObjectId.imp));
+                    handler.addObject(new Imp(xx*32,yy*32,handler,ObjectId.imp));
                 }
             }
         }
@@ -296,7 +293,6 @@ public class Game extends Canvas implements Runnable {
             helpMenu.render(g);
         } else if (state == STATE.DEAD) {
             cam = new Camera(0,0);
-
             deadMenu.render(g);
         }
 
@@ -317,7 +313,7 @@ public class Game extends Canvas implements Runnable {
         return gameInstance;
     }
 
-    private static BufferedImage resize(BufferedImage img, int height, int width) {
+    public static BufferedImage resize(BufferedImage img, int height, int width) {
         Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = resized.createGraphics();
