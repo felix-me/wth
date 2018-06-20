@@ -56,7 +56,6 @@ public class Player extends GameObject {
         } else if(powerUpRemaining != -1) {
             powerUpRemaining--;
         }
-        System.out.println(powerUpRemaining);
         x += velX;
         y += velY;
 
