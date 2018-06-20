@@ -265,9 +265,15 @@ public class Game extends Canvas implements Runnable {
         g.setColor(Color.black);
         g.fillRect(0, 0, getWidth(), getHeight()); // Stop flickering
 
-        g.drawImage(background,0,0,this);
+        background = resize(background,700,900);
+        
 
         g2d.translate(cam.getX(),cam.getY()); //begin of cam
+        int xx = 0;
+        do{
+            g.drawImage(background,xx,0,this);
+            xx += background.getWidth();
+        } while(xx < background.getWidth() * 5);
 
         if (state == STATE.GAME) {
             handler.render(g);
@@ -292,6 +298,14 @@ public class Game extends Canvas implements Runnable {
         return tex;
     }
 
+    private static BufferedImage resize(BufferedImage img, int height, int width) {
+        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resized.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        return resized;
+    }
     /**
      * Main method for running WTH.
      * @param args standard main method param
@@ -300,4 +314,6 @@ public class Game extends Canvas implements Runnable {
     {
         new Window(800, 600, "What The Hell!?", new Game());
     }
+
+
 }
