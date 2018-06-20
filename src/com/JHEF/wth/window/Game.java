@@ -1,6 +1,7 @@
 package com.JHEF.wth.window;
 
 import com.JHEF.wth.framework.KeyInput;
+import com.JHEF.wth.framework.MouseInput;
 import com.JHEF.wth.framework.ObjectId;
 import com.JHEF.wth.framework.Texture;
 import com.JHEF.wth.objects.Block;
@@ -25,11 +26,24 @@ public class Game extends Canvas implements Runnable {
 
     private BufferedImage level = null;
 
+    private MainMenu mainMenu;
+    private OptionsMenu optionsMenu;
+    private HelpMenu helpMenu;
 
     // Object
     Handler handler;
     Camera cam;
     static Texture tex;
+
+    // Game states
+    public enum STATE{
+        GAME,
+        MENU,
+        HELP,
+        OPTIONS
+    };
+
+    public static STATE state = STATE.MENU;
 
     private void init()
     {
@@ -46,6 +60,10 @@ public class Game extends Canvas implements Runnable {
 
         cam = new Camera(0,0);
 
+        mainMenu = new MainMenu();
+        optionsMenu = new OptionsMenu();
+        helpMenu = new HelpMenu();
+
         loadImageLevel(level);
 
         //handler.addObject(new Player(100, 100, handler, ObjectId.player));
@@ -53,6 +71,8 @@ public class Game extends Canvas implements Runnable {
         //handler.createLevel();
 
         this.addKeyListener(new KeyInput(handler));
+        this.addMouseListener(new MouseInput());
+
     }
 
     private void loadImageLevel(BufferedImage image){
@@ -207,10 +227,12 @@ public class Game extends Canvas implements Runnable {
      */
     public void tick()
     {
-        handler.tick();
-        for(int i = 0; i < handler.object.size(); i++) {
-            if(handler.object.get(i).getId() == ObjectId.player) {
-                cam.tick(handler.object.get(i));
+        if(state == STATE.GAME) {
+            handler.tick();
+            for (int i = 0; i < handler.object.size(); i++) {
+                if (handler.object.get(i).getId() == ObjectId.player) {
+                    cam.tick(handler.object.get(i));
+                }
             }
         }
     }
@@ -243,7 +265,15 @@ public class Game extends Canvas implements Runnable {
 
         g2d.translate(cam.getX(),cam.getY()); //begin of cam
 
-        handler.render(g);
+        if (state == STATE.GAME) {
+            handler.render(g);
+        } else if (state == STATE.MENU) {
+            mainMenu.render(g);
+        } else if (state == STATE.OPTIONS) {
+            optionsMenu.render(g);
+        } else if (state == STATE.HELP) {
+            helpMenu.render(g);
+        }
 
         g2d.translate(-cam.getX(),-cam.getY()); //end of cam
 
