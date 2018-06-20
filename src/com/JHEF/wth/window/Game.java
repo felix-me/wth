@@ -4,6 +4,7 @@ import com.JHEF.wth.framework.KeyInput;
 import com.JHEF.wth.framework.ObjectId;
 import com.JHEF.wth.framework.Texture;
 import com.JHEF.wth.objects.Block;
+import com.JHEF.wth.objects.Enemy;
 import com.JHEF.wth.objects.Player;
 
 import java.awt.*;
@@ -47,10 +48,6 @@ public class Game extends Canvas implements Runnable {
         cam = new Camera(0,0);
 
         loadImageLevel(level);
-
-        //handler.addObject(new Player(100, 100, handler, ObjectId.player));
-
-        //handler.createLevel();
 
         this.addKeyListener(new KeyInput(handler));
     }
@@ -140,6 +137,9 @@ public class Game extends Canvas implements Runnable {
                 }
                 if(red == 0 && green == 0 && blue == 0) {
                     handler.addObject(new Player(xx*32,yy*32,handler,ObjectId.player));
+                }
+                if(red == 255 && green == 100 && blue == 255) {
+                    handler.addObject(new Enemy(xx*32,yy*32,handler,ObjectId.imp));
                 }
             }
         }

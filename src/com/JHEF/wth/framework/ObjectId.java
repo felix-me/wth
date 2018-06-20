@@ -5,5 +5,6 @@ package com.JHEF.wth.framework;
  */
 public enum ObjectId {
     player(),
-    block()
+    block(),
+    imp()
 }
