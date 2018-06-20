@@ -5,9 +5,12 @@ import com.JHEF.wth.framework.ObjectId;
 import com.JHEF.wth.framework.Texture;
 import com.JHEF.wth.window.Game;
 import com.JHEF.wth.window.Handler;
+import com.JHEF.wth.window.Animation;
 
 import java.awt.*;
 import java.util.LinkedList;
+
+
 
 public class Player extends GameObject {
 
@@ -16,6 +19,8 @@ public class Player extends GameObject {
     private final float MAX_SPEED = 7;
 
     private Handler handler;
+
+    private Animation playerWalk;
 
     Texture tex = Game.getInstance();
 
@@ -29,6 +34,8 @@ public class Player extends GameObject {
     public Player(float x, float y, Handler handler, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
+
+        playerWalk = new Animation(10, tex.player[1], tex.player[2]);
     }
 
     public void tick(LinkedList<GameObject> object) {
@@ -44,6 +51,7 @@ public class Player extends GameObject {
         }
 
         Collision(object);
+        playerWalk.runAnimation();
     }
 
     private void Collision(LinkedList<GameObject> object) {
@@ -84,7 +92,12 @@ public class Player extends GameObject {
 
     public void render(Graphics g) {
         g.setColor(Color.GREEN);
-        g.drawImage(tex.player[0],(int)x,(int)y,null);
+        if(velX != 0){
+            playerWalk.drawAnimation(g,(int)x,(int)y);
+        } else {
+
+            g.drawImage(tex.player[0], (int) x, (int) y, null);
+        }
 
 //        Graphics2D g2d = (Graphics2D) g;
 //

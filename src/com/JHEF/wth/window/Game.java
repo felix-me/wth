@@ -24,6 +24,7 @@ public class Game extends Canvas implements Runnable {
     public static int WIDTH, HEIGHT;
 
     private BufferedImage level = null;
+    private BufferedImage background = null;
 
 
     // Object
@@ -41,6 +42,7 @@ public class Game extends Canvas implements Runnable {
 
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("/hell.png");
+        background = loader.loadImage("/hell_BG.gif");
 
         handler = new Handler();
 
@@ -240,6 +242,8 @@ public class Game extends Canvas implements Runnable {
 
         g.setColor(Color.black);
         g.fillRect(0, 0, getWidth(), getHeight()); // Stop flickering
+
+        g.drawImage(background,0,0,this);
 
         g2d.translate(cam.getX(),cam.getY()); //begin of cam
 
