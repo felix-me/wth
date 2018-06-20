@@ -17,7 +17,7 @@ public class Enemy extends GameObject {
 
     private Handler handler;
 
-    Texture tex = Game.getInstance();
+    Texture tex = Game.getTexture();
 
     /**
      * constructor for {@link GameObject}

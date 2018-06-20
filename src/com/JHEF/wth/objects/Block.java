@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 public class Block extends GameObject {
 
-    Texture tex = Game.getInstance();
+    Texture tex = Game.getTexture();
     private int type;
 
     /**
@@ -31,6 +31,10 @@ public class Block extends GameObject {
 
     public void render(Graphics g) {
         g.drawImage(tex.block[type], (int)x, (int)y, null);
+    }
+
+    public int getType() {
+        return type;
     }
 
     public Rectangle getBounds() {

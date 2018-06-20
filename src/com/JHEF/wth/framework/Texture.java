@@ -11,7 +11,7 @@ public class Texture {
     private BufferedImage player_sheet = null;
 
     public BufferedImage[] block = new BufferedImage[22];
-    public BufferedImage[] player = new BufferedImage[1];
+    public BufferedImage[] player = new BufferedImage[11];
 
     public Texture() {
 
@@ -55,6 +55,19 @@ public class Texture {
         block[20] = bs.grabImage(8,1,32,32); //bottom middle cloud
         block[21] = bs.grabImage(9,1,32,32); //bottom right cloud
 
-        player[0] = ps.grabImage(1,2,32,64);//player
+        player[0] = ps.grabImage(1,2,32,64);//player facing right
+        player[1] = ps.grabImage(2,2,32,64);//player facing right 2
+        player[2] = ps.grabImage(1,4,32,64);//player damage right
+        player[3] = ps.grabImage(1,5,32,64);//player damage right 2
+
+        player[4] = ps.grabImage(1,1,32,64);//player facing left
+        player[5] = ps.grabImage(2,1,32,64);//player facing left left 2
+        player[6] = ps.grabImage(1,3,32,64);//player damage left
+        player[7] = ps.grabImage(2,3,32,64);//player damage left 2
+
+        player[9] = ps.grabImage(1,5,32,64);//player jump right
+        player[10] = ps.grabImage(2,5,32,64);//player jump left
+
+
     }
 }

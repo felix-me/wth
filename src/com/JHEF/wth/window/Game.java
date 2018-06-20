@@ -1,6 +1,7 @@
 package com.JHEF.wth.window;
 
 import com.JHEF.wth.framework.KeyInput;
+import com.JHEF.wth.framework.MouseInput;
 import com.JHEF.wth.framework.ObjectId;
 import com.JHEF.wth.framework.Texture;
 import com.JHEF.wth.objects.Block;
@@ -25,12 +26,35 @@ public class Game extends Canvas implements Runnable {
     public static int WIDTH, HEIGHT;
 
     private BufferedImage level = null;
+    private BufferedImage background = null;
 
+    private MainMenu mainMenu;
+    private OptionsMenu optionsMenu;
+    private HelpMenu helpMenu;
+    private DeathMenu deadMenu;
+
+    private static Game gameInstance;
+
+    public Game()
+    {
+        gameInstance=this;
+    }
 
     // Object
     Handler handler;
     Camera cam;
     static Texture tex;
+
+    // Game states
+    public enum STATE{
+        GAME,
+        MENU,
+        HELP,
+        OPTIONS,
+        DEAD
+    };
+
+    public static STATE state = STATE.MENU;
 
     private void init()
     {
@@ -42,17 +66,25 @@ public class Game extends Canvas implements Runnable {
 
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("/hell.png");
+        background = loader.loadImage("/hell_BG.gif");
 
         handler = new Handler();
 
         cam = new Camera(0,0);
 
+        mainMenu = new MainMenu();
+        optionsMenu = new OptionsMenu();
+        helpMenu = new HelpMenu();
+        deadMenu = new DeathMenu();
+
         loadImageLevel(level);
 
         this.addKeyListener(new KeyInput(handler));
+        this.addMouseListener(new MouseInput());
+
     }
 
-    private void loadImageLevel(BufferedImage image){
+    public void loadImageLevel(BufferedImage image){
 
         int h = image.getHeight();
         int w = image.getWidth();
@@ -137,6 +169,7 @@ public class Game extends Canvas implements Runnable {
                 }
                 if(red == 0 && green == 0 && blue == 0) {
                     handler.addObject(new Player(xx*32,yy*32,handler,ObjectId.player));
+                    System.out.println("xx: "+xx*32+"yy: "+yy+32);
                 }
                 if(red == 255 && green == 100 && blue == 255) {
                     handler.addObject(new Enemy(xx*32,yy*32,handler,ObjectId.imp));
@@ -207,10 +240,12 @@ public class Game extends Canvas implements Runnable {
      */
     public void tick()
     {
-        handler.tick();
-        for(int i = 0; i < handler.object.size(); i++) {
-            if(handler.object.get(i).getId() == ObjectId.player) {
-                cam.tick(handler.object.get(i));
+        if(state == STATE.GAME) {
+            handler.tick();
+            for (int i = 0; i < handler.object.size(); i++) {
+                if (handler.object.get(i).getId() == ObjectId.player) {
+                    cam.tick(handler.object.get(i));
+                }
             }
         }
     }
@@ -241,9 +276,29 @@ public class Game extends Canvas implements Runnable {
         g.setColor(Color.black);
         g.fillRect(0, 0, getWidth(), getHeight()); // Stop flickering
 
-        g2d.translate(cam.getX(),cam.getY()); //begin of cam
+        background = resize(background,700,900);
+        
 
-        handler.render(g);
+        g2d.translate(cam.getX(),cam.getY()); //begin of cam
+        int xx = 0;
+        do{
+            g.drawImage(background,xx,0,this);
+            xx += background.getWidth();
+        } while(xx < background.getWidth() * 5);
+
+        if (state == STATE.GAME) {
+            handler.render(g);
+        } else if (state == STATE.MENU) {
+            mainMenu.render(g);
+        } else if (state == STATE.OPTIONS) {
+            optionsMenu.render(g);
+        } else if (state == STATE.HELP) {
+            helpMenu.render(g);
+        } else if (state == STATE.DEAD) {
+            cam = new Camera(0,0);
+
+            deadMenu.render(g);
+        }
 
         g2d.translate(-cam.getX(),-cam.getY()); //end of cam
 
@@ -254,8 +309,21 @@ public class Game extends Canvas implements Runnable {
         bs.show();
     }
 
-    public static Texture getInstance() {
+    public static Texture getTexture() {
         return tex;
+    }
+
+    public static Game getInstance() {
+        return gameInstance;
+    }
+
+    private static BufferedImage resize(BufferedImage img, int height, int width) {
+        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resized.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        return resized;
     }
 
     /**
@@ -266,4 +334,6 @@ public class Game extends Canvas implements Runnable {
     {
         new Window(800, 600, "What The Hell!?", new Game());
     }
+
+
 }
