@@ -67,13 +67,8 @@ public class Player extends GameObject {
             if(killBlocks.contains(((Block) tempObject).getType())) {
                 BufferedImageLoader loader = new BufferedImageLoader();
                 Game.state = Game.STATE.DEAD;
-                for (int i = 0; i < handler.object.size(); i++) {
-                    if (handler.object.get(i).getId() == ObjectId.player) {
-                        handler.removeObject(handler.object.get(i));
-                    }
-                }
+                handler.object.clear();
                 Game.getInstance().loadImageLevel(loader.loadImage("/hell.png"));
-                System.out.println("die");
             }
         }
     }
