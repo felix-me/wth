@@ -55,7 +55,7 @@ public class Player extends GameObject {
             if (tempObj.getId() == ObjectId.block) {
 
                 if (getBoundsTop().intersects(tempObj.getBounds())) {
-                    y = tempObj.getY() + height/2;
+                    y = tempObj.getY()+9;
                     velY = 0;
                 }
 
@@ -93,7 +93,7 @@ public class Player extends GameObject {
 //        g2d.draw(getBoundsBottom());
 //        g2d.draw(getBoundsRight());
 //        g2d.draw(getBoundsLeft());
-//        g2d.draw(getBoundsTop());dw
+//        g2d.draw(getBoundsTop());
 
     }
 
@@ -105,12 +105,12 @@ public class Player extends GameObject {
         return new Rectangle((int)x + (int)width/2 - (int)(width/2)/2, (int)y + (int)(height/2), (int)width/2, (int)height/2);
     }
     public Rectangle getBoundsTop() {
-        return new Rectangle((int)x + (int)width/2 - (int)(width/2)/2, (int)y, (int)width/2, (int)height/2);
+        return new Rectangle((int)x + (int)width/2 - (int)(width/2)/2, (int)y+23, (int)width/2, ((int)height/2)-23);
     }
     public Rectangle getBoundsRight() {
-        return new Rectangle((int)x + (int)(width-5), (int)y+5, 5, (int)height - 10);
+        return new Rectangle((int)x + (int)(width-5), (int)y+23, 5, (int)height - 23);
     }
     public Rectangle getBoundsLeft() {
-        return new Rectangle((int)x, (int)y+5, 5, (int)height - 10);
+        return new Rectangle((int)x, (int)y+23, 5, (int)height - 23);
     }
 }
