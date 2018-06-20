@@ -33,6 +33,10 @@ public class Block extends GameObject {
         g.drawImage(tex.block[type], (int)x, (int)y, null);
     }
 
+    public int getType() {
+        return type;
+    }
+
     public Rectangle getBounds() {
         return new Rectangle((int) x, (int) y, 32, 32);
     }

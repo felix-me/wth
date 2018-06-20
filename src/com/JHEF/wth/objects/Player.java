@@ -8,6 +8,7 @@ import com.JHEF.wth.window.Handler;
 import com.JHEF.wth.window.Animation;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -19,8 +20,8 @@ public class Player extends GameObject {
     private final float MAX_SPEED = 7;
 
     private Handler handler;
-
     private Animation playerWalk;
+    private ArrayList<Integer> killBlocks = new ArrayList<>();
 
     Texture tex = Game.getInstance();
 
@@ -36,6 +37,10 @@ public class Player extends GameObject {
         this.handler = handler;
 
         playerWalk = new Animation(10, tex.player[1], tex.player[2]);
+        killBlocks.add(6);
+        killBlocks.add(7);
+        killBlocks.add(8);
+        killBlocks.add(9);
     }
 
     public void tick(LinkedList<GameObject> object) {
@@ -54,6 +59,15 @@ public class Player extends GameObject {
         playerWalk.runAnimation();
     }
 
+    private void doesCollide(GameObject tempObject) {
+        if(tempObject instanceof Block) {
+            Block blockCollided = (Block) tempObject;
+            if(killBlocks.contains(((Block) tempObject).getType())) {
+                System.out.println("die");
+            }
+        }
+    }
+
     private void Collision(LinkedList<GameObject> object) {
 
         for (int i = 0; i < handler.object.size(); i++) {
@@ -63,8 +77,9 @@ public class Player extends GameObject {
             if (tempObj.getId() == ObjectId.block) {
 
                 if (getBoundsTop().intersects(tempObj.getBounds())) {
-                    y = tempObj.getY() + height/2;
+                    y = tempObj.getY()+9;
                     velY = 0;
+                    doesCollide(tempObj);
                 }
 
                 if (getBoundsBottom().intersects(tempObj.getBounds())) {
@@ -72,6 +87,7 @@ public class Player extends GameObject {
                     velY = 0;
                     falling = false;
                     jumping = false;
+                    doesCollide(tempObj);
                 }
                 else {
                     falling = true;
@@ -79,10 +95,12 @@ public class Player extends GameObject {
 
                 if (getBoundsRight().intersects(tempObj.getBounds())) {
                     x = tempObj.getX() - width;
+                    doesCollide(tempObj);
                 }
 
                 if (getBoundsLeft().intersects(tempObj.getBounds())) {
                     x = tempObj.getX() + width;
+                    doesCollide(tempObj);
                 }
             }
 
@@ -106,7 +124,7 @@ public class Player extends GameObject {
 //        g2d.draw(getBoundsBottom());
 //        g2d.draw(getBoundsRight());
 //        g2d.draw(getBoundsLeft());
-//        g2d.draw(getBoundsTop());dw
+//        g2d.draw(getBoundsTop());
 
     }
 
@@ -118,12 +136,12 @@ public class Player extends GameObject {
         return new Rectangle((int)x + (int)width/2 - (int)(width/2)/2, (int)y + (int)(height/2), (int)width/2, (int)height/2);
     }
     public Rectangle getBoundsTop() {
-        return new Rectangle((int)x + (int)width/2 - (int)(width/2)/2, (int)y, (int)width/2, (int)height/2);
+        return new Rectangle((int)x + (int)width/2 - (int)(width/2)/2, (int)y+23, (int)width/2, ((int)height/2)-23);
     }
     public Rectangle getBoundsRight() {
-        return new Rectangle((int)x + (int)(width-5), (int)y+5, 5, (int)height - 10);
+        return new Rectangle((int)x + (int)(width-5), (int)y+23, 5, (int)height - 23);
     }
     public Rectangle getBoundsLeft() {
-        return new Rectangle((int)x, (int)y+5, 5, (int)height - 10);
+        return new Rectangle((int)x, (int)y+23, 5, (int)height - 23);
     }
 }
