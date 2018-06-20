@@ -92,9 +92,6 @@ public class Game extends Canvas implements Runnable {
         int h = image.getHeight();
         int w = image.getWidth();
 
-        System.out.println(h);
-        System.out.println(w);
-
         for(int xx = 0; xx < h; xx++) {
             for(int yy = 0; yy < w; yy++) {
                 System.out.println(xx);
