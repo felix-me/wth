@@ -4,10 +4,12 @@ import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
 import com.JHEF.wth.framework.Texture;
 import com.JHEF.wth.window.Animation;
+import com.JHEF.wth.window.BufferedImageLoader;
 import com.JHEF.wth.window.Game;
 import com.JHEF.wth.window.Handler;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -26,7 +28,7 @@ public class Player extends GameObject {
 
     private int powerUpRemaining = -1;
 
-    Texture tex = Game.getInstance();
+    Texture tex = Game.getTexture();
 
     /**
      * constructor for {@link GameObject}
@@ -70,13 +72,20 @@ public class Player extends GameObject {
         playerWalk.runAnimation();
     }
 
-    private void doesCollide(GameObject tempObject, int i) {
+    private void doesCollide(GameObject tempObject, int ix) {
         if(tempObject instanceof Block) {
             Block blockCollided = (Block) tempObject;
             if(killBlocks.contains(blockCollided.getType())) {
-                System.out.println("die");
+                BufferedImageLoader loader = new BufferedImageLoader();
+                Game.state = Game.STATE.DEAD;
+                for (int i = 0; i < handler.object.size(); i++) {
+                    if (handler.object.get(i).getId() == ObjectId.player) {
+                        handler.removeObject(handler.object.get(i));
+                    }
+                }
+                Game.getInstance().loadImageLevel(loader.loadImage("/hell.png"));
             } else if(powerUpBlocks.contains(blockCollided.getType())) {
-                handler.removeObject(handler.object.get(i));
+                handler.removeObject(handler.object.get(ix));
                 gravity = 0.3f;
                 powerUpRemaining = 500;
             }
