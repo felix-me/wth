@@ -13,6 +13,7 @@ public class Texture {
 
     public BufferedImage[] block = new BufferedImage[24];
     public BufferedImage[] player = new BufferedImage[11];
+    public BufferedImage[] playerJump = new BufferedImage[2];
 
     public Texture() {
 
@@ -70,8 +71,8 @@ public class Texture {
         player[6] = ps.grabImage(1,3,32,64);//player damage left
         player[7] = ps.grabImage(2,3,32,64);//player damage left 2
 
-        player[9] = ps.grabImage(1,5,32,64);//player jump right
-        player[10] = ps.grabImage(2,5,32,64);//player jump left
+        playerJump[0] = ps.grabImage(1,5,32,64);//player jump right
+        playerJump[1] = ps.grabImage(2,5,32,64);//player jump left
 
     }
 }
