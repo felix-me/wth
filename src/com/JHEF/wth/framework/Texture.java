@@ -6,11 +6,12 @@ import java.awt.image.BufferedImage;
 
 public class Texture {
 
-    SpriteSheet bs, ps;
+    SpriteSheet bs, ps, pus;
     private BufferedImage block_sheet = null;
     private BufferedImage player_sheet = null;
+    private BufferedImage powerup_sheet = null;
 
-    public BufferedImage[] block = new BufferedImage[23];
+    public BufferedImage[] block = new BufferedImage[24];
     public BufferedImage[] player = new BufferedImage[11];
 
     public Texture() {
@@ -20,12 +21,14 @@ public class Texture {
         try {
             block_sheet = loader.loadImage("/WTH_TEXTURES.png");
             player_sheet = loader.loadImage("/ghosts.png");
+            powerup_sheet = loader.loadImage("/powerup.png");
         }catch(Exception e) {
             e.printStackTrace();
         }
 
         bs = new SpriteSheet(block_sheet);
         ps = new SpriteSheet(player_sheet);
+        pus = new SpriteSheet(powerup_sheet);
 
         getTextures();
 
@@ -54,7 +57,8 @@ public class Texture {
         block[19] = bs.grabImage(7,1,32,32); //bottom left cloud
         block[20] = bs.grabImage(8,1,32,32); //bottom middle cloud
         block[21] = bs.grabImage(9,1,32,32); //bottom right cloud
-        block[22] = bs.grabImage(9,1,32,32);
+        block[22] = pus.grabImage(1,1,32,32);
+        block[23] = pus.grabImage(2,1,32,32);
 
         player[0] = ps.grabImage(1,2,32,64);//player facing right
         player[1] = ps.grabImage(2,2,32,64);//player facing right 2
@@ -68,7 +72,6 @@ public class Texture {
 
         player[9] = ps.grabImage(1,5,32,64);//player jump right
         player[10] = ps.grabImage(2,5,32,64);//player jump left
-
 
     }
 }
