@@ -18,9 +18,10 @@ public class Player extends GameObject {
     private float width = 32, height = 64;
     private float gravity = 0.62f;
     private final float MAX_SPEED = 7;
+    private int facing = 1;
 
     private Handler handler;
-    private Animation playerWalk;
+    private Animation playerWalk, playerWalkLeft;
     private ArrayList<Integer> killBlocks = new ArrayList<>();
 
     Texture tex = Game.getInstance();
@@ -37,6 +38,7 @@ public class Player extends GameObject {
         this.handler = handler;
 
         playerWalk = new Animation(10, tex.player[1], tex.player[2]);
+        playerWalkLeft = new Animation(10, tex.player[4], tex.player[5]);
         killBlocks.add(6);
         killBlocks.add(7);
         killBlocks.add(8);
@@ -47,6 +49,8 @@ public class Player extends GameObject {
         x += velX;
         y += velY;
 
+        if(velX > 0) facing =1;
+        else if(velX < 0) facing = -1;
         if (falling || jumping) {
             velY += gravity;
 
@@ -57,6 +61,7 @@ public class Player extends GameObject {
 
         Collision(object);
         playerWalk.runAnimation();
+        playerWalkLeft.runAnimation();
     }
 
     private void doesCollide(GameObject tempObject) {
@@ -110,11 +115,24 @@ public class Player extends GameObject {
 
     public void render(Graphics g) {
         g.setColor(Color.GREEN);
-        if(velX != 0){
-            playerWalk.drawAnimation(g,(int)x,(int)y);
-        } else {
+        if(jumping){
 
-            g.drawImage(tex.player[0], (int) x, (int) y, null);
+            if(facing == 1){
+
+                g.drawImage(tex.playerJump[0],(int)x,(int)y, 32,64,null);
+            } else if(facing == -1){
+
+                g.drawImage(tex.playerJump[1],(int)x,(int)y, 32,64,null);
+            }
+
+        } else{
+            if(velX != 0){
+                if(facing == 1) playerWalk.drawAnimation(g,(int)x,(int)y);
+                else playerWalkLeft.drawAnimation(g,(int)x,(int)y);
+            } else {
+
+                g.drawImage(tex.player[0], (int) x, (int) y, null);
+            }
         }
 
 //        Graphics2D g2d = (Graphics2D) g;
