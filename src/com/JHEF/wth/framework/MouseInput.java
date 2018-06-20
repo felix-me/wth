@@ -65,6 +65,22 @@ public class MouseInput implements MouseListener {
                     Game.state = Game.STATE.MENU;
                 }
             }
+            //////// DEATH MENU //////////
+        } else if (Game.state == Game.STATE.DEAD) {
+            // Reset button
+            if (mx >= Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50) {
+                if (my >= 400 && my <= 455) {
+                    // Pressed Back Button
+                    Game.state = Game.STATE.GAME;
+                }
+            }
+            // Menu button
+            if (mx >= Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50) {
+                if (my >= 480 && my <= 535) {
+                    // Pressed Back Button
+                    Game.state = Game.STATE.MENU;
+                }
+            }
         }
 
 

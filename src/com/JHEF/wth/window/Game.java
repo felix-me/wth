@@ -30,6 +30,14 @@ public class Game extends Canvas implements Runnable {
     private MainMenu mainMenu;
     private OptionsMenu optionsMenu;
     private HelpMenu helpMenu;
+    private DeathMenu deadMenu;
+
+    private static Game gameInstance;
+
+    public Game()
+    {
+        gameInstance=this;
+    }
 
     // Object
     Handler handler;
@@ -41,7 +49,8 @@ public class Game extends Canvas implements Runnable {
         GAME,
         MENU,
         HELP,
-        OPTIONS
+        OPTIONS,
+        DEAD
     };
 
     public static STATE state = STATE.MENU;
@@ -65,6 +74,7 @@ public class Game extends Canvas implements Runnable {
         mainMenu = new MainMenu();
         optionsMenu = new OptionsMenu();
         helpMenu = new HelpMenu();
+        deadMenu = new DeathMenu();
 
         loadImageLevel(level);
 
@@ -77,7 +87,7 @@ public class Game extends Canvas implements Runnable {
 
     }
 
-    private void loadImageLevel(BufferedImage image){
+    public void loadImageLevel(BufferedImage image){
 
         int h = image.getHeight();
         int w = image.getWidth();
@@ -162,6 +172,7 @@ public class Game extends Canvas implements Runnable {
                 }
                 if(red == 0 && green == 0 && blue == 0) {
                     handler.addObject(new Player(xx*32,yy*32,handler,ObjectId.player));
+                    System.out.println("xx: "+xx*32+"yy: "+yy+32);
                 }
             }
         }
@@ -283,6 +294,10 @@ public class Game extends Canvas implements Runnable {
             optionsMenu.render(g);
         } else if (state == STATE.HELP) {
             helpMenu.render(g);
+        } else if (state == STATE.DEAD) {
+            cam = new Camera(0,0);
+
+            deadMenu.render(g);
         }
 
         g2d.translate(-cam.getX(),-cam.getY()); //end of cam
@@ -294,8 +309,12 @@ public class Game extends Canvas implements Runnable {
         bs.show();
     }
 
-    public static Texture getInstance() {
+    public static Texture getTexture() {
         return tex;
+    }
+
+    public static Game getInstance() {
+        return gameInstance;
     }
 
     private static BufferedImage resize(BufferedImage img, int height, int width) {
@@ -306,6 +325,7 @@ public class Game extends Canvas implements Runnable {
         g2d.dispose();
         return resized;
     }
+
     /**
      * Main method for running WTH.
      * @param args standard main method param

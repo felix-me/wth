@@ -3,11 +3,13 @@ package com.JHEF.wth.objects;
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
 import com.JHEF.wth.framework.Texture;
+import com.JHEF.wth.window.BufferedImageLoader;
 import com.JHEF.wth.window.Game;
 import com.JHEF.wth.window.Handler;
 import com.JHEF.wth.window.Animation;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -23,7 +25,7 @@ public class Player extends GameObject {
     private Animation playerWalk;
     private ArrayList<Integer> killBlocks = new ArrayList<>();
 
-    Texture tex = Game.getInstance();
+    Texture tex = Game.getTexture();
 
     /**
      * constructor for {@link GameObject}
@@ -63,6 +65,14 @@ public class Player extends GameObject {
         if(tempObject instanceof Block) {
             Block blockCollided = (Block) tempObject;
             if(killBlocks.contains(((Block) tempObject).getType())) {
+                BufferedImageLoader loader = new BufferedImageLoader();
+                Game.state = Game.STATE.DEAD;
+                for (int i = 0; i < handler.object.size(); i++) {
+                    if (handler.object.get(i).getId() == ObjectId.player) {
+                        handler.removeObject(handler.object.get(i));
+                    }
+                }
+                Game.getInstance().loadImageLevel(loader.loadImage("/hell.png"));
                 System.out.println("die");
             }
         }
