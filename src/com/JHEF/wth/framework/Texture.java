@@ -6,14 +6,16 @@ import java.awt.image.BufferedImage;
 
 public class Texture {
 
-    SpriteSheet bs, ps, pus;
+    SpriteSheet bs, ps, pus, gw;
     private BufferedImage block_sheet = null;
     private BufferedImage player_sheet = null;
     private BufferedImage powerup_sheet = null;
+    private BufferedImage wings_sheet = null;
 
     public BufferedImage[] block = new BufferedImage[24];
     public BufferedImage[] player = new BufferedImage[11];
     public BufferedImage[] playerJump = new BufferedImage[2];
+    public BufferedImage[] playerWings = new BufferedImage[6];
 
     public Texture() {
 
@@ -23,6 +25,8 @@ public class Texture {
             block_sheet = loader.loadImage("/WTH_TEXTURES.png");
             player_sheet = loader.loadImage("/ghosts.png");
             powerup_sheet = loader.loadImage("/powerup.png");
+            wings_sheet = loader.loadImage("/ghost_wings.png");
+
         }catch(Exception e) {
             e.printStackTrace();
         }
@@ -30,6 +34,7 @@ public class Texture {
         bs = new SpriteSheet(block_sheet);
         ps = new SpriteSheet(player_sheet);
         pus = new SpriteSheet(powerup_sheet);
+        gw = new SpriteSheet(wings_sheet);
 
         getTextures();
 
@@ -73,6 +78,16 @@ public class Texture {
 
         playerJump[0] = ps.grabImage(1,5,32,64);//player jump right
         playerJump[1] = ps.grabImage(2,5,32,64);//player jump left
+
+        playerWings[0] = gw.grabImage(1,1,32,64);//wings right 1
+        playerWings[1] = gw.grabImage(2,1,32,64);//wings right 2
+        playerWings[2] = gw.grabImage(3,1,32,64);//wings right 3
+
+        playerWings[3] = gw.grabImage(1,2,32,64);//wings right 1
+        playerWings[4] = gw.grabImage(2,2,32,64);//wings right 2
+        playerWings[5] = gw.grabImage(3,2,32,64);//wings right 3
+
+
 
     }
 }
