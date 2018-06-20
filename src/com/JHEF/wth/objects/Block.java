@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 public class Block extends GameObject {
 
-    Texture tex = Game.getInstance();
+    Texture tex = Game.getTexture();
     private int type;
 
     /**

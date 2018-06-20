@@ -3,11 +3,13 @@ package com.JHEF.wth.objects;
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
 import com.JHEF.wth.framework.Texture;
+import com.JHEF.wth.window.Animation;
+import com.JHEF.wth.window.BufferedImageLoader;
 import com.JHEF.wth.window.Game;
 import com.JHEF.wth.window.Handler;
-import com.JHEF.wth.window.Animation;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -23,8 +25,11 @@ public class Player extends GameObject {
     private Handler handler;
     private Animation playerWalk, playerWalkLeft;
     private ArrayList<Integer> killBlocks = new ArrayList<>();
+    private ArrayList<Integer> powerUpBlocks = new ArrayList<>();
 
-    Texture tex = Game.getInstance();
+    private int powerUpRemaining = -1;
+
+    Texture tex = Game.getTexture();
 
     /**
      * constructor for {@link GameObject}
@@ -43,9 +48,17 @@ public class Player extends GameObject {
         killBlocks.add(7);
         killBlocks.add(8);
         killBlocks.add(9);
+        powerUpBlocks.add(22);
     }
 
     public void tick(LinkedList<GameObject> object) {
+        if(powerUpRemaining == 0) {
+            gravity=0.62f;
+            powerUpRemaining --;
+        } else if(powerUpRemaining != -1) {
+            powerUpRemaining--;
+        }
+        System.out.println(powerUpRemaining);
         x += velX;
         y += velY;
 
@@ -64,11 +77,18 @@ public class Player extends GameObject {
         playerWalkLeft.runAnimation();
     }
 
-    private void doesCollide(GameObject tempObject) {
+    private void doesCollide(GameObject tempObject, int ix) {
         if(tempObject instanceof Block) {
             Block blockCollided = (Block) tempObject;
-            if(killBlocks.contains(((Block) tempObject).getType())) {
-                System.out.println("die");
+            if(killBlocks.contains(blockCollided.getType())) {
+                BufferedImageLoader loader = new BufferedImageLoader();
+                Game.state = Game.STATE.DEAD;
+                handler.object.clear();
+                Game.getInstance().loadImageLevel(loader.loadImage("/hell.png"));
+            } else if(powerUpBlocks.contains(blockCollided.getType())) {
+                handler.removeObject(handler.object.get(ix));
+                gravity = 0.3f;
+                powerUpRemaining = 500;
             }
         }
     }
@@ -84,7 +104,7 @@ public class Player extends GameObject {
                 if (getBoundsTop().intersects(tempObj.getBounds())) {
                     y = tempObj.getY()+9;
                     velY = 0;
-                    doesCollide(tempObj);
+                    doesCollide(tempObj,i);
                 }
 
                 if (getBoundsBottom().intersects(tempObj.getBounds())) {
@@ -92,7 +112,7 @@ public class Player extends GameObject {
                     velY = 0;
                     falling = false;
                     jumping = false;
-                    doesCollide(tempObj);
+                    doesCollide(tempObj,i);
                 }
                 else {
                     falling = true;
@@ -100,12 +120,12 @@ public class Player extends GameObject {
 
                 if (getBoundsRight().intersects(tempObj.getBounds())) {
                     x = tempObj.getX() - width;
-                    doesCollide(tempObj);
+                    doesCollide(tempObj,i);
                 }
 
                 if (getBoundsLeft().intersects(tempObj.getBounds())) {
                     x = tempObj.getX() + width;
-                    doesCollide(tempObj);
+                    doesCollide(tempObj,i);
                 }
             }
 

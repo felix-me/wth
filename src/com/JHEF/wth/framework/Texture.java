@@ -10,7 +10,7 @@ public class Texture {
     private BufferedImage block_sheet = null;
     private BufferedImage player_sheet = null;
 
-    public BufferedImage[] block = new BufferedImage[22];
+    public BufferedImage[] block = new BufferedImage[23];
     public BufferedImage[] player = new BufferedImage[11];
     public BufferedImage[] playerJump = new BufferedImage[2];
 
@@ -55,6 +55,7 @@ public class Texture {
         block[19] = bs.grabImage(7,1,32,32); //bottom left cloud
         block[20] = bs.grabImage(8,1,32,32); //bottom middle cloud
         block[21] = bs.grabImage(9,1,32,32); //bottom right cloud
+        block[22] = bs.grabImage(9,1,32,32);
 
         player[0] = ps.grabImage(1,2,32,64);//player facing right
         player[1] = ps.grabImage(2,2,32,64);//player facing right 2
