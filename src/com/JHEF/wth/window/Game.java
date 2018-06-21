@@ -73,7 +73,7 @@ public class Game extends Canvas implements Runnable {
         WON
     };
 
-    public static STATE state = STATE.MENU;
+    public static STATE state = STATE.GAME;
 
     private void init()
     {
