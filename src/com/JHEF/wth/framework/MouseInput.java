@@ -1,6 +1,7 @@
 package com.JHEF.wth.framework;
 
 import com.JHEF.wth.window.Game;
+import com.JHEF.wth.window.OptionsMenu;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -68,6 +69,9 @@ public class MouseInput implements MouseListener {
                     Game.getInstance().setMuted(!Game.getInstance().isMuted());
                     if (!Game.getInstance().isMuted()) {
                         Game.getInstance().getThemeTune().playSound("/mainMenuTheme.wav", true);
+                        OptionsMenu.muteOption = "Mute";
+                    } else {
+                        OptionsMenu.muteOption = "Unmute";
                     }
                 }
                 if (my >= 500 && my <= 555) {

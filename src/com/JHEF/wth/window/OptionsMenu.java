@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class OptionsMenu {
 
+    public static String muteOption = "Mute";
+
     public Rectangle muteButton = new Rectangle(Game.WIDTH /2 - 50, 200, 100, 55);
     public Rectangle keyMapButton = new Rectangle(Game.WIDTH /2 - 150, 280, 250, 55);
     public Rectangle backButton = new Rectangle(Game.WIDTH /2 - 50, 500, 100, 55);
@@ -23,7 +25,7 @@ public class OptionsMenu {
         Font btnFnt = new Font("Rockwell", Font.BOLD, 30);
         g.setFont(btnFnt);
 
-        g.drawString("Mute", muteButton.x+5, muteButton.y+40);
+        g.drawString(muteOption, muteButton.x+5, muteButton.y+40);
         g.drawString("Change Key Input", keyMapButton.x+5, keyMapButton.y+40);
         g.drawString("Back", backButton.x+5, backButton.y+40);
         g.setColor(Color.RED);
