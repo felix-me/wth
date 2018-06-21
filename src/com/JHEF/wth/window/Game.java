@@ -2,6 +2,7 @@ package com.JHEF.wth.window;
 
 import com.JHEF.wth.framework.*;
 import com.JHEF.wth.objects.Block;
+import com.JHEF.wth.objects.Player;
 import com.JHEF.wth.objects.Imp;
 import com.JHEF.wth.objects.Player;
 import com.JHEF.wth.framework.KeyInput;
@@ -91,6 +92,15 @@ public class Game extends Canvas implements Runnable {
 
         this.addKeyListener(new KeyInput(handler));
         this.addMouseListener(new MouseInput());
+
+        // Play Theme Tune
+        Sound sound = new Sound();
+
+        try {
+            sound.playSound("C:\\Users\\User\\IdeaProjects\\wth\\res\\mainMenuTheme.wav");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
     /**
