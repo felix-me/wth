@@ -1,27 +1,22 @@
 package com.JHEF.wth.window;
 
-import com.JHEF.wth.framework.Sound;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class WinMenu {
 
-    public Rectangle resetButton = new Rectangle(Game.WIDTH /2 - 50, 400, 100, 55);
-    public Rectangle menuButton = new Rectangle(Game.WIDTH /2 - 100, 480, 200, 55);
-
-    BufferedImageLoader bi = new BufferedImageLoader();
+    private Rectangle resetButton = new Rectangle(Game.WIDTH / 2 - 50, 400, 100, 55);
+    private Rectangle menuButton = new Rectangle(Game.WIDTH / 2 - 100, 480, 200, 55);
 
     public void render(Graphics g) {
         g.setColor(Color.BLUE);
-        g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);;
+        g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.WHITE);
-        Font titleFont = new Font("Rockwell", Font.CENTER_BASELINE, 80);
+        Font titleFont = new Font("Rockwell", Font.BOLD, 80);
         g.setFont(titleFont);
         g.drawString("WUN.", Game.WIDTH / 2 - 80, 75);
 
-        Font bodyFnt = new Font("Rockwell", Font.CENTER_BASELINE, 30);
+        Font bodyFnt = new Font("Rockwell", Font.BOLD, 30);
         g.setFont(bodyFnt);
         g.drawString("Level One: "+(Game.levelOne-Game.levelTimer)+" Seconds", Game.WIDTH / 2 - 180, 110);
         g.drawString("Level Two: "+(Game.levelTwo-Game.levelOne)+" Seconds", Game.WIDTH / 2 - 180, 150);
@@ -34,14 +29,5 @@ public class WinMenu {
         g2d.draw(menuButton);
 
         g.dispose();
-    }
-
-    private static BufferedImage resize(BufferedImage img, int height, int width) {
-        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = resized.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
-        g2d.dispose();
-        return resized;
     }
 }
