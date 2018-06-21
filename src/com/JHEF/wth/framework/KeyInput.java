@@ -4,12 +4,11 @@ import com.JHEF.wth.window.Handler;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 public class KeyInput extends KeyAdapter {
 
-    Handler handler;
-    public static int keyToChange = -1;
+    static int keyToChange = -1;
+    private Handler handler;
     private static int right = KeyEvent.VK_D;
     private static int left = KeyEvent.VK_A;
     private static int up = KeyEvent.VK_W;
@@ -38,23 +37,23 @@ public class KeyInput extends KeyAdapter {
             switch (keyToChange){
 
                 case 0:
-                    this.left = key;
+                    left = key;
 
                     System.out.println("Changed left");
                     break;
 
                 case 1:
-                    this.up = key;
+                    up = key;
                     System.out.println("Changed up");
                     break;
 
                 case 2:
-                    this.right = key;
+                    right = key;
                     System.out.println("Changed right");
 
             }
 
-            this.keyToChange = -1;
+            keyToChange = -1;
         } else {
 
 
@@ -63,7 +62,7 @@ public class KeyInput extends KeyAdapter {
 
                 if (tempObj.getId() == ObjectId.player) {
                     if (key == up && !tempObj.isJumping()) {
-                        tempObj.setJumping(true);
+                        tempObj.setJumping();
                         tempObj.setVelY(-10);
                     }
                     if (key == left) {
@@ -101,22 +100,5 @@ public class KeyInput extends KeyAdapter {
                 }
             }
         }
-    }
-
-    public void setControls(String control){
-
-        int key = 1;
-
-        System.out.println("Being Called");
-
-        try {
-            System.out.println(System.in.read());
-            key = System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-
     }
 }
