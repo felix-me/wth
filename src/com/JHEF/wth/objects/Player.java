@@ -86,7 +86,7 @@ public class Player extends GameObject {
             if(killBlocks.contains(blockCollided.getType())) {
                 sound.playSound("/devilDeathNoiseConverted.wav", false);
 
-                //Game.getInstance().restartGame();
+                Game.getInstance().restartGame();
 
             } else if(powerUpBlocks.contains(blockCollided.getType())) {
                 handler.removeObject(handler.object.get(ix));
