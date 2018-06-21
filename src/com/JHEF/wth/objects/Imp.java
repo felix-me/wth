@@ -2,8 +2,6 @@ package com.JHEF.wth.objects;
 
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
-import com.JHEF.wth.framework.Texture;
-import com.JHEF.wth.window.BufferedImageLoader;
 import com.JHEF.wth.window.Game;
 import com.JHEF.wth.window.Handler;
 
@@ -15,7 +13,6 @@ public class Imp extends GameObject {
 
 
     private float width = 48, height = 48;
-    private float gravity = 0.62f;
 
     private int prevTime = ((int) System.currentTimeMillis() / 1000);
 
@@ -49,6 +46,7 @@ public class Imp extends GameObject {
             prevTime = seconds;
 
             if (falling || jumping) {
+                float gravity = 0.62f;
                 velY += gravity;
             }
 
