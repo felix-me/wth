@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MouseInput implements MouseListener {
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -60,10 +61,25 @@ public class MouseInput implements MouseListener {
         } else if (Game.state == Game.STATE.OPTIONS) {
             // Back button
             if (mx >= Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50) {
-                if (my >= 500 && my <= 555) {
+                if (my >= 450 && my <= 505) {
                     // Pressed Back Button
                     Game.state = Game.STATE.MENU;
+
+                } else if(mx >= Game.WIDTH / 2 - 150 && mx <= Game.WIDTH / 2 + 150){
+
+                    if(my >= 230 && my<= 285){
+
+                        KeyInput.keyToChange = 0;
+
+                    } else if(my >= 310 && my<= 365){
+                        KeyInput.keyToChange = 2;
+
+                    } else if(my >= 390 && my<= 445){
+                        KeyInput.keyToChange = 1;
+                    }
+
                 }
+
             }
             //////// DEATH MENU //////////
         } else if (Game.state == Game.STATE.DEAD || Game.state == Game.STATE.WON) {

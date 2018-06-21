@@ -1,14 +1,6 @@
 package com.JHEF.wth.window;
 
 import com.JHEF.wth.framework.*;
-import com.JHEF.wth.objects.Block;
-import com.JHEF.wth.objects.Player;
-import com.JHEF.wth.objects.Imp;
-import com.JHEF.wth.objects.Player;
-import com.JHEF.wth.framework.KeyInput;
-import com.JHEF.wth.framework.MouseInput;
-import com.JHEF.wth.framework.ObjectId;
-import com.JHEF.wth.framework.Texture;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -35,6 +27,7 @@ public class Game extends Canvas implements Runnable {
 
     private static Game gameInstance;
 
+
     private long timer = System.currentTimeMillis();
     public static int levelNumber = 0;
 
@@ -51,6 +44,9 @@ public class Game extends Canvas implements Runnable {
 
     // Object
     Handler handler;
+
+    private static KeyInput keyInput;
+
     Camera cam;
     static Texture tex;
 
@@ -87,10 +83,11 @@ public class Game extends Canvas implements Runnable {
         helpMenu = new HelpMenu();
         deadMenu = new DeathMenu();
         winMenu = new WinMenu();
+        keyInput = new KeyInput(handler);
 
 //        handler.loadImageLevel(level);
 
-        this.addKeyListener(new KeyInput(handler));
+        this.addKeyListener(keyInput);
         this.addMouseListener(new MouseInput());
 
         // Play Theme Tune
@@ -245,6 +242,10 @@ public class Game extends Canvas implements Runnable {
 
     public long getTimer() {
         return timer;
+    }
+
+    public static KeyInput getKeyInput() {
+        return keyInput;
     }
 
     public void restartGame() {
