@@ -1,7 +1,13 @@
 package com.JHEF.wth.window;
 
+import com.JHEF.wth.framework.Sound;
+import com.JHEF.wth.objects.Player;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.net.URL;
 
 public class MainMenu {
 

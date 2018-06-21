@@ -1,9 +1,6 @@
 package com.JHEF.wth.window;
 
-import com.JHEF.wth.framework.KeyInput;
-import com.JHEF.wth.framework.MouseInput;
-import com.JHEF.wth.framework.ObjectId;
-import com.JHEF.wth.framework.Texture;
+import com.JHEF.wth.framework.*;
 import com.JHEF.wth.objects.Block;
 import com.JHEF.wth.objects.Player;
 
@@ -84,6 +81,9 @@ public class Game extends Canvas implements Runnable {
 
         this.addKeyListener(new KeyInput(handler));
         this.addMouseListener(new MouseInput());
+
+        SoundCaller sc = new SoundCaller();
+        sc.playGameThemes();
 
     }
 
@@ -296,7 +296,6 @@ public class Game extends Canvas implements Runnable {
             helpMenu.render(g);
         } else if (state == STATE.DEAD) {
             cam = new Camera(0,0);
-
             deadMenu.render(g);
         }
 

@@ -1,5 +1,7 @@
 package com.JHEF.wth.window;
 
+import com.JHEF.wth.framework.Sound;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

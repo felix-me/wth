@@ -2,6 +2,7 @@ package com.JHEF.wth.objects;
 
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
+import com.JHEF.wth.framework.Sound;
 import com.JHEF.wth.framework.Texture;
 import com.JHEF.wth.window.Animation;
 import com.JHEF.wth.window.BufferedImageLoader;
@@ -76,6 +77,12 @@ public class Player extends GameObject {
         if(tempObject instanceof Block) {
             Block blockCollided = (Block) tempObject;
             if(killBlocks.contains(blockCollided.getType())) {
+                try {
+                    Sound sound = new Sound();
+                    sound.playSound("C:\\Users\\User\\IdeaProjects\\wth\\res\\devilDeathNoiseConverted.wav");
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
                 BufferedImageLoader loader = new BufferedImageLoader();
                 Game.state = Game.STATE.DEAD;
                 handler.object.clear();
