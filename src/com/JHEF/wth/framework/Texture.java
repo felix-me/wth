@@ -5,15 +5,20 @@ import com.JHEF.wth.window.BufferedImageLoader;
 import java.awt.image.BufferedImage;
 
 public class Texture {
-
-    SpriteSheet bs, ps, is;
+  
+    SpriteSheet bs, ps, is, pus, gw;
     private BufferedImage block_sheet = null;
     private BufferedImage player_sheet = null;
     private BufferedImage imp_sheet = null;
 
-    public BufferedImage[] block = new BufferedImage[23];
+    private BufferedImage powerup_sheet = null;
+    private BufferedImage wings_sheet = null;
+
+    public BufferedImage[] block = new BufferedImage[24];
     public BufferedImage[] player = new BufferedImage[11];
     public BufferedImage[] imp = new BufferedImage[50];
+    public BufferedImage[] playerJump = new BufferedImage[2];
+    public BufferedImage[] playerWings = new BufferedImage[6];
 
     public Texture() {
 
@@ -23,13 +28,17 @@ public class Texture {
             block_sheet = loader.loadImage("/WTH_TEXTURES.png");
             player_sheet = loader.loadImage("/ghosts.png");
             imp_sheet = loader.loadImage("/imp.png");
-        }catch(Exception e) {
+            powerup_sheet = loader.loadImage("/powerup.png");
+            wings_sheet = loader.loadImage("/ghost_wings.png");
+        } catch(Exception e) {
             e.printStackTrace();
         }
 
         bs = new SpriteSheet(block_sheet);
         ps = new SpriteSheet(player_sheet);
         is = new SpriteSheet(imp_sheet);
+        pus = new SpriteSheet(powerup_sheet);
+        gw = new SpriteSheet(wings_sheet);
 
         getTextures();
 
@@ -58,7 +67,8 @@ public class Texture {
         block[19] = bs.grabImage(7,1,32,32); //bottom left cloud
         block[20] = bs.grabImage(8,1,32,32); //bottom middle cloud
         block[21] = bs.grabImage(9,1,32,32); //bottom right cloud
-        block[22] = bs.grabImage(9,1,32,32);
+        block[22] = pus.grabImage(1,1,32,32);
+        block[23] = pus.grabImage(2,1,32,32);
 
         player[0] = ps.grabImage(1,2,32,64);//player facing right
         player[1] = ps.grabImage(2,2,32,64);//player facing right 2
@@ -70,8 +80,17 @@ public class Texture {
         player[6] = ps.grabImage(1,3,32,64);//player damage left
         player[7] = ps.grabImage(2,3,32,64);//player damage left 2
 
-        player[9] = ps.grabImage(1,5,32,64);//player jump right
-        player[10] = ps.grabImage(2,5,32,64);//player jump left
+        playerJump[0] = ps.grabImage(1,5,32,64);//player jump right
+        playerJump[1] = ps.grabImage(2,5,32,64);//player jump left
+
+        playerWings[0] = gw.grabImage(1,1,32,64);//wings right 1
+        playerWings[1] = gw.grabImage(2,1,32,64);//wings right 2
+        playerWings[2] = gw.grabImage(3,1,32,64);//wings right 3
+
+        playerWings[3] = gw.grabImage(1,2,32,64);//wings right 1
+        playerWings[4] = gw.grabImage(2,2,32,64);//wings right 2
+        playerWings[5] = gw.grabImage(3,2,32,64);//wings right 3
+
 
         imp[0] = is.grabImage(2,1,32,32);//player jump left
 

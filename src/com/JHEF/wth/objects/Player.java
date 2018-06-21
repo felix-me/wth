@@ -3,13 +3,9 @@ package com.JHEF.wth.objects;
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
 import com.JHEF.wth.framework.Texture;
-import com.JHEF.wth.window.Animation;
-import com.JHEF.wth.window.BufferedImageLoader;
-import com.JHEF.wth.window.Game;
-import com.JHEF.wth.window.Handler;
+import com.JHEF.wth.window.*;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -20,13 +16,15 @@ public class Player extends GameObject {
     private float width = 32, height = 64;
     private float gravity = 0.62f;
     private final float MAX_SPEED = 7;
+    private int facing = 1;
 
     private Handler handler;
-    private Animation playerWalk;
+    private Animation playerWalk, playerWalkLeft, playerWithWings, playerWithWingsLeft;
     private ArrayList<Integer> killBlocks = new ArrayList<>();
     private ArrayList<Integer> powerUpBlocks = new ArrayList<>();
 
     private int powerUpRemaining = -1;
+    private Camera cam;
 
     /**
      * constructor for {@link GameObject}
@@ -35,11 +33,17 @@ public class Player extends GameObject {
      * @param y  pos y
      * @param id objectId
      */
-    public Player(float x, float y, Handler handler, ObjectId id) {
+    public Player(float x, float y, Handler handler, Camera cam, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
+        this.cam = cam;
 
         playerWalk = new Animation(10, tex.player[1], tex.player[2]);
+        playerWalkLeft = new Animation(10, tex.player[4], tex.player[5]);
+        playerWithWings = new Animation(10,tex.playerWings[0], tex.playerWings[1], tex.playerWings[2]);
+        playerWithWingsLeft = new Animation(10,tex.playerWings[3], tex.playerWings[4], tex.playerWings[5]);
+
+
         killBlocks.add(6);
         killBlocks.add(7);
         killBlocks.add(8);
@@ -57,6 +61,8 @@ public class Player extends GameObject {
         x += velX;
         y += velY;
 
+        if(velX > 0) facing =1;
+        else if(velX < 0) facing = -1;
         if (falling || jumping) {
             velY += gravity;
 
@@ -67,6 +73,9 @@ public class Player extends GameObject {
 
         Collision(object);
         playerWalk.runAnimation();
+        playerWalkLeft.runAnimation();
+        playerWithWings.runAnimation();
+        playerWithWingsLeft.runAnimation();
     }
 
     private void doesCollide(GameObject tempObject, int ix) {
@@ -74,6 +83,7 @@ public class Player extends GameObject {
             Block blockCollided = (Block) tempObject;
             if(killBlocks.contains(blockCollided.getType())) {
                 Game.getInstance().restartGame();
+                Game.levelNumber = 0;
             } else if(powerUpBlocks.contains(blockCollided.getType())) {
                 handler.removeObject(handler.object.get(ix));
                 gravity = 0.3f;
@@ -116,6 +126,13 @@ public class Player extends GameObject {
                     x = tempObj.getX() + width;
                     doesCollide(tempObj,i);
                 }
+            } else if(tempObj.getId() == ObjectId.flag) {
+                //switch level
+                BufferedImageLoader loader = new BufferedImageLoader();
+                if(getBounds().intersects(tempObj.getBounds())) {
+                    handler.switchLevel();
+                    Game.levelNumber++;
+                }
             }
 
             else if (tempObj.getId() == ObjectId.imp) {
@@ -132,10 +149,35 @@ public class Player extends GameObject {
     }
 
     public void render(Graphics g) {
-        if(velX != 0){
-            playerWalk.drawAnimation(g,(int)x,(int)y);
-        } else {
-            g.drawImage(tex.player[0], (int) x, (int) y, null);
+        if(jumping){
+
+            if(facing == 1){
+                if(powerUpRemaining != -1){
+                    playerWithWings.drawAnimation(g,(int)x,(int)y);
+                } else g.drawImage(tex.playerJump[0],(int)x,(int)y, 32,64,null);
+            } else if(facing == -1){
+                if(powerUpRemaining != -1) playerWithWingsLeft.drawAnimation(g,(int)x,(int)y);
+                else g.drawImage(tex.playerJump[1],(int)x,(int)y, 32,64,null);
+            }
+
+        } else{
+            if(velX != 0){
+                if(facing == 1) {
+                    if(powerUpRemaining != -1){
+                        playerWithWings.drawAnimation(g,(int)x,(int)y);
+                    }
+                    else playerWalk.drawAnimation(g,(int)x,(int)y);
+                }
+                else {
+                    if(powerUpRemaining != -1) playerWithWingsLeft.drawAnimation(g,(int)x,(int)y);
+                    else playerWalkLeft.drawAnimation(g,(int)x,(int)y);
+                }
+            } else {
+                if(powerUpRemaining != -1){
+
+                    g.drawImage(tex.playerWings[0], (int)x,(int)y,32,64,null);
+                } else g.drawImage(tex.player[0], (int) x, (int) y, null);
+            }
         }
     }
 
