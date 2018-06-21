@@ -66,7 +66,7 @@ public class MouseInput implements MouseListener {
                 }
             }
             //////// DEATH MENU //////////
-        } else if (Game.state == Game.STATE.DEAD) {
+        } else if (Game.state == Game.STATE.DEAD || Game.state == Game.STATE.WON) {
             // Reset button
             if (mx >= Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50) {
                 if (my >= 400 && my <= 455) {

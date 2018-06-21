@@ -1,5 +1,7 @@
 package com.JHEF.wth.framework;
 
+import com.JHEF.wth.window.Game;
+
 import java.awt.*;
 import java.util.LinkedList;
 
@@ -13,6 +15,8 @@ public abstract class GameObject
     protected float velX = 0, velY = 0;
     protected boolean falling = true;
     protected boolean jumping = false;
+
+    public Texture tex = Game.getTexture();
 
     /**
      * constructor for {@link GameObject}
@@ -41,9 +45,13 @@ public abstract class GameObject
 
     /**
      * getBoundsBottom
-     * returns the collision bound of a player
+     * returns the collision bounds of a given game object
      */
     public abstract Rectangle getBounds();
+    public abstract Rectangle getBoundsTop();
+    public abstract Rectangle getBoundsBottom();
+    public abstract Rectangle getBoundsLeft();
+    public abstract Rectangle getBoundsRight();
 
     public float getX() {
         return x;
