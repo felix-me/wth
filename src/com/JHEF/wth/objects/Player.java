@@ -84,6 +84,7 @@ public class Player extends GameObject {
             Sound sound = new Sound();
             Block blockCollided = (Block) tempObject;
             if(killBlocks.contains(blockCollided.getType())) {
+                handler.sound.killSound();
                 sound.playSound("/devilDeathNoiseConverted.wav", false);
 
                 Game.getInstance().restartGame();

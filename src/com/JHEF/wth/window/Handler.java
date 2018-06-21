@@ -27,7 +27,7 @@ public class Handler {
     private BufferedImage level2;
     private BufferedImage level3;
 
-    Sound sound = new Sound();
+    public Sound sound = new Sound();
 
     public Handler(Camera cam) {
         this.cam = cam;
