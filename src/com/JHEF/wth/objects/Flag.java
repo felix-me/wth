@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 public class Flag extends GameObject {
 
-    Texture tex = Game.getTexture();
+    private Texture tex = Game.getTexture();
 
     public Flag(float x, float y, ObjectId id) {
         super(x, y, id);
