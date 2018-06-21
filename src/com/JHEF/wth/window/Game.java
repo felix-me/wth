@@ -267,6 +267,7 @@ public class Game extends Canvas implements Runnable {
         handler.object.clear();
         handler.loadImageLevel(loader.loadImage("/hell.png"));
         Game.levelNumber = 0;
+        Game.levelTimer = -1;
     }
 
     public static BufferedImage resize(BufferedImage img, int height, int width) {

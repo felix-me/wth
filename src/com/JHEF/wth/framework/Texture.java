@@ -71,8 +71,8 @@ public class Texture {
         block[19] = bs.grabImage(7,1,32,32); //bottom left cloud
         block[20] = bs.grabImage(8,1,32,32); //bottom middle cloud
         block[21] = bs.grabImage(9,1,32,32); //bottom right cloud
-        block[22] = pus.grabImage(1,1,32,32);
-        block[23] = pus.grabImage(2,1,32,32);
+        block[22] = pus.grabImage(1,1,32,32); // power up
+        block[23] = pus.grabImage(2,1,32,32); //alternate power up
 
         player[0] = ps.grabImage(1,2,32,64);//player facing right
         player[1] = ps.grabImage(2,2,32,64);//player facing right 2
