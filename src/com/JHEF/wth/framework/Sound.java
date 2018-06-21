@@ -9,18 +9,15 @@ import java.io.File;
 
 public class Sound {
 
-    File f;
-    AudioInputStream ais;
-    Clip clip;
-    String currentDir;
+    private Clip clip;
 
-        public void playSound(String file, boolean loop) {
+    public void playSound(String file, boolean loop) {
 
-            if (!Game.getInstance().isMuted()) {
+        if (Game.getInstance().isNotMuted()) {
                 try {
-                    currentDir = System.getProperty("user.dir") + "/res";
-                    f = new File(currentDir + file);
-                    ais = AudioSystem.getAudioInputStream(f);
+                    String currentDir = System.getProperty("user.dir") + "/res";
+                    File f = new File(currentDir + file);
+                    AudioInputStream ais = AudioSystem.getAudioInputStream(f);
                     clip = AudioSystem.getClip();
                     clip.open(ais);
                     if (loop) {
