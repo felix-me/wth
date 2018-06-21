@@ -5,10 +5,10 @@ import java.awt.image.BufferedImage;
 
 public class DeathMenu {
 
-    public Rectangle resetButton = new Rectangle(Game.WIDTH /2 - 50, 400, 100, 55);
-    public Rectangle menuButton = new Rectangle(Game.WIDTH /2 - 100, 480, 200, 55);
+    private Rectangle resetButton = new Rectangle(Game.WIDTH / 2 - 50, 400, 100, 55);
+    private Rectangle menuButton = new Rectangle(Game.WIDTH / 2 - 100, 480, 200, 55);
 
-    BufferedImageLoader bi = new BufferedImageLoader();
+    private BufferedImageLoader bi = new BufferedImageLoader();
 
     public void render(Graphics g) {
         g.setColor(Color.BLACK);
@@ -18,11 +18,11 @@ public class DeathMenu {
         g.drawImage(image, Game.WIDTH / 2 - 250, 60, null);
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.WHITE);
-        Font titleFont = new Font("Rockwell", Font.CENTER_BASELINE, 80);
+        Font titleFont = new Font("Rockwell", Font.BOLD, 80);
         g.setFont(titleFont);
         g.drawString("ded.", Game.WIDTH / 2 - 80, 75);
 
-        Font bodyFnt = new Font("Rockwell", Font.CENTER_BASELINE, 30);
+        Font bodyFnt = new Font("Rockwell", Font.BOLD, 30);
         g.setFont(bodyFnt);
         g.drawString("You have been returned to Hell", Game.WIDTH / 2 - 220, 110);
 
