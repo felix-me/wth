@@ -3,8 +3,9 @@ package com.JHEF.wth.objects;
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
 import com.JHEF.wth.framework.Sound;
-import com.JHEF.wth.framework.Texture;
-import com.JHEF.wth.window.*;
+import com.JHEF.wth.window.Animation;
+import com.JHEF.wth.window.Game;
+import com.JHEF.wth.window.Handler;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ public class Player extends GameObject {
 
     private float width = 32, height = 64;
     private float gravity = 0.62f;
-    private final float MAX_SPEED = 7;
     private int facing = 1;
 
     private Handler handler;
@@ -25,7 +25,6 @@ public class Player extends GameObject {
     private ArrayList<Integer> powerUpBlocks = new ArrayList<>();
 
     private int powerUpRemaining = -1;
-    private Camera cam;
 
     /**
      * constructor for {@link GameObject}
@@ -34,10 +33,9 @@ public class Player extends GameObject {
      * @param y  pos y
      * @param id objectId
      */
-    public Player(float x, float y, Handler handler, Camera cam, ObjectId id) {
+    public Player(float x, float y, Handler handler, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
-        this.cam = cam;
 
         playerWalk = new Animation(10, tex.player[1], tex.player[2]);
         playerWalkLeft = new Animation(10, tex.player[4], tex.player[5]);
@@ -67,12 +65,13 @@ public class Player extends GameObject {
         if (falling || jumping) {
             velY += gravity;
 
+            float MAX_SPEED = 7;
             if (velY > MAX_SPEED) {
                 velY = MAX_SPEED;
             }
         }
 
-        Collision(object);
+        Collision();
         playerWalk.runAnimation();
         playerWalkLeft.runAnimation();
         playerWithWings.runAnimation();
@@ -97,7 +96,7 @@ public class Player extends GameObject {
         }
     }
 
-    private void Collision(LinkedList<GameObject> object) {
+    private void Collision() {
 
         for (int i = 0; i < handler.object.size(); i++) {
 
@@ -133,7 +132,6 @@ public class Player extends GameObject {
                 }
             } else if(tempObj.getId() == ObjectId.flag) {
                 //switch level
-                BufferedImageLoader loader = new BufferedImageLoader();
                 if(getBounds().intersects(tempObj.getBounds())) {
                     handler.switchLevel();
                     Game.levelNumber++;
