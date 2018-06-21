@@ -17,24 +17,18 @@ import java.util.LinkedList;
  */
 public class Handler {
 
-    public LinkedList<GameObject> object = new LinkedList<GameObject>();
+    public LinkedList<GameObject> object = new LinkedList<>();
 
     private GameObject tempObject;
 
     private Camera cam;
     private BufferedImageLoader loader;
-    private BufferedImage level;
-    private BufferedImage level2;
-    private BufferedImage level3;
 
     public Sound sound = new Sound();
 
     public Handler(Camera cam) {
         this.cam = cam;
         loader = new BufferedImageLoader();
-        level = loader.loadImage("/hell.png");
-        level2 = loader.loadImage("/earth.png");
-        level3 = loader.loadImage("/heaven.png");
     }
 
     /**
@@ -54,9 +48,8 @@ public class Handler {
      * @param g graphic to draw
      */
     public void render(Graphics g) {
-        for (int i = 0; i < object.size(); i++) {
-            tempObject = object.get(i);
-
+        for (GameObject anObject : object) {
+            tempObject = anObject;
             tempObject.render(g);
         }
     }
@@ -66,7 +59,7 @@ public class Handler {
      *
      * @param object object to add
      */
-    public void addObject(GameObject object) {
+    private void addObject(GameObject object) {
         this.object.add(object);
     }
 
@@ -79,11 +72,11 @@ public class Handler {
         this.object.remove(object);
     }
 
-    public void clearLevel() {
+    private void clearLevel() {
         object.clear();
     }
 
-    public void loadImageLevel(BufferedImage image) {
+    void loadImageLevel(BufferedImage image) {
 
         int h = image.getHeight();
         int w = image.getWidth();
@@ -167,7 +160,7 @@ public class Handler {
                     addObject(new Flag(xx * 32, yy * 32, ObjectId.flag));
                 }
                 if (red == 0 && green == 0 && blue == 0) {
-                    addObject(new Player(xx * 32, (yy * 32), this, cam, ObjectId.player));
+                    addObject(new Player(xx * 32, (yy * 32), this, ObjectId.player));
                     System.out.println("xx: " + xx * 32 + "yy: " + yy + 32);
                 }
                 int number = (int) (Math.random() * 100);
