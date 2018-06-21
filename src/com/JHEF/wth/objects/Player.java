@@ -96,7 +96,6 @@ public class Player extends GameObject {
                 handler.loadImageLevel(loader.loadImage("/hell.png"));
 
                 Game.getInstance().restartGame();
-                Game.levelNumber = 0;
 
             } else if(powerUpBlocks.contains(blockCollided.getType())) {
                 handler.removeObject(handler.object.get(ix));
