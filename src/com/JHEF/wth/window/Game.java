@@ -97,7 +97,7 @@ public class Game extends Canvas implements Runnable {
         Sound sound = new Sound();
 
         try {
-            sound.playSound("C:\\Users\\User\\IdeaProjects\\wth\\res\\mainMenuTheme.wav");
+            sound.playSound("/mainMenuTheme.wav");
         } catch (Exception e) {
             System.out.println(e);
         }
