@@ -187,12 +187,15 @@ public class Handler {
         switch (Game.levelNumber)
         {
             case 0:
+                Game.levelOne = System.currentTimeMillis()/1000;
                 loadImageLevel(loader.loadImage("/earth.png"));
                 break;
             case 1:
+                Game.levelTwo = System.currentTimeMillis()/1000;
                 loadImageLevel(loader.loadImage("/heaven.png"));
                 break;
             case 2:
+                Game.levelThree = System.currentTimeMillis()/1000;
                 Game.state = Game.STATE.WON;
                 break;
         }

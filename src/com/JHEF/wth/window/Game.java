@@ -35,6 +35,11 @@ public class Game extends Canvas implements Runnable {
 
     private static Game gameInstance;
 
+    public static long levelTimer = System.currentTimeMillis()/1000;
+    public static long levelOne;
+    public static long levelTwo;
+    public static long levelThree;
+  
     private boolean muted = false;
 
     public static int levelNumber = 0;
@@ -128,10 +133,10 @@ public class Game extends Canvas implements Runnable {
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0; // FPS
         double ns = 1000000000 / amountOfTicks;
+        long timer = System.currentTimeMillis();
         double delta = 0;
         int updates = 0;
         int frames = 0;
-        long timer = System.currentTimeMillis();
         while (running)
         {
             long now = System.nanoTime();
@@ -163,6 +168,9 @@ public class Game extends Canvas implements Runnable {
     public void tick()
     {
         if(state == STATE.GAME) {
+            if(levelTimer == -1) {
+                levelTimer = System.currentTimeMillis() / 1000;
+            }
             handler.tick();
             for (int i = 0; i < handler.object.size(); i++) {
                 if (handler.object.get(i).getId() == ObjectId.player) {
