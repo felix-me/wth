@@ -2,6 +2,7 @@ package com.JHEF.wth.window;
 
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
+import com.JHEF.wth.framework.Sound;
 import com.JHEF.wth.objects.Block;
 import com.JHEF.wth.objects.Flag;
 import com.JHEF.wth.objects.Imp;
@@ -25,6 +26,8 @@ public class Handler {
     private BufferedImage level;
     private BufferedImage level2;
     private BufferedImage level3;
+
+    Sound sound = new Sound();
 
     public Handler(Camera cam) {
         this.cam = cam;
@@ -187,14 +190,21 @@ public class Handler {
         switch (Game.levelNumber)
         {
             case 0:
+                Game.getInstance().getThemeTune().killSound();
+                sound.playSound("/earthTheme.wav", true);
                 Game.levelOne = System.currentTimeMillis()/1000;
                 loadImageLevel(loader.loadImage("/earth.png"));
                 break;
             case 1:
+                sound.killSound();
+                sound.playSound("/heavenTheme.wav", true);
                 Game.levelTwo = System.currentTimeMillis()/1000;
                 loadImageLevel(loader.loadImage("/heaven.png"));
                 break;
             case 2:
+                sound.killSound();
+                sound.playSound("/applause.wav", false);
+                sound.playSound("/winSong.wav", true);
                 Game.levelThree = System.currentTimeMillis()/1000;
                 Game.state = Game.STATE.WON;
                 break;
