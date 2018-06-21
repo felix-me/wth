@@ -9,10 +9,12 @@ public class Sound {
     File f;
     AudioInputStream ais;
     Clip clip;
+    String currentDir;
 
         public void playSound(String file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
-            f = new File(file);
+            currentDir = System.getProperty("user.dir")+"/res";
+            f = new File(currentDir+file);
             ais = AudioSystem.getAudioInputStream(f);
             clip = AudioSystem.getClip();
             clip.open(ais);
