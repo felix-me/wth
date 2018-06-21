@@ -170,7 +170,7 @@ public class Handler {
                 int number = (int) (Math.random() * 100);
                 System.out.println(number);
                 if(red == 255 && green == 100 && blue == 255) {
-                    if(number < 25) {
+                    if(number < 40) {
                         addObject(new Imp(xx * 32, yy * 32, this, ObjectId.imp));
                     }
                 }
