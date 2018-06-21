@@ -6,19 +6,21 @@ import java.awt.image.BufferedImage;
 
 public class Texture {
   
-    SpriteSheet bs, ps, is, pus, gw;
+    SpriteSheet bs, ps, is, pus, gw, le;
     private BufferedImage block_sheet = null;
     private BufferedImage player_sheet = null;
     private BufferedImage imp_sheet = null;
 
     private BufferedImage powerup_sheet = null;
     private BufferedImage wings_sheet = null;
+    private BufferedImage level_end = null;
 
     public BufferedImage[] block = new BufferedImage[24];
     public BufferedImage[] player = new BufferedImage[11];
     public BufferedImage[] imp = new BufferedImage[50];
     public BufferedImage[] playerJump = new BufferedImage[2];
     public BufferedImage[] playerWings = new BufferedImage[6];
+    public BufferedImage[] levelEnd = new BufferedImage[1];
 
     public Texture() {
 
@@ -30,6 +32,7 @@ public class Texture {
             imp_sheet = loader.loadImage("/imp.png");
             powerup_sheet = loader.loadImage("/powerup.png");
             wings_sheet = loader.loadImage("/ghost_wings.png");
+            level_end = loader.loadImage("/finish.png");
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -39,6 +42,7 @@ public class Texture {
         is = new SpriteSheet(imp_sheet);
         pus = new SpriteSheet(powerup_sheet);
         gw = new SpriteSheet(wings_sheet);
+        le = new SpriteSheet(level_end);
 
         getTextures();
 
@@ -94,6 +98,7 @@ public class Texture {
 
         imp[0] = is.grabImage(2,1,32,32);//player jump left
 
+        levelEnd[0] = le.grabImage(1,1,32,32); //Finish line
 
     }
 }

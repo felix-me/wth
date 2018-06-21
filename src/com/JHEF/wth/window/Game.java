@@ -39,6 +39,9 @@ public class Game extends Canvas implements Runnable {
     public static long levelOne;
     public static long levelTwo;
     public static long levelThree;
+  
+    private boolean muted = false;
+
     public static int levelNumber = 0;
 
     private BufferedImageLoader loader;
@@ -100,9 +103,9 @@ public class Game extends Canvas implements Runnable {
         Sound sound = new Sound();
 
         try {
-            sound.playSound("C:\\Users\\User\\IdeaProjects\\wth\\res\\mainMenuTheme.wav");
+            sound.playSound("/mainMenuTheme.wav");
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
     }
@@ -138,6 +141,7 @@ public class Game extends Canvas implements Runnable {
         double delta = 0;
         int updates = 0;
         int frames = 0;
+        long timer = System.currentTimeMillis();
         while (running)
         {
             long now = System.nanoTime();
@@ -250,6 +254,14 @@ public class Game extends Canvas implements Runnable {
         return gameInstance;
     }
 
+    public boolean isMuted() {
+        return muted;
+    }
+
+    public void setMuted(boolean muted) {
+        this.muted = muted;
+    }
+  
     public void restartGame() {
         BufferedImageLoader loader = new BufferedImageLoader();
         Game.state = Game.STATE.DEAD;
