@@ -84,10 +84,11 @@ public class Player extends GameObject {
         if(tempObject instanceof Block) {
             Block blockCollided = (Block) tempObject;
             if(killBlocks.contains(blockCollided.getType())) {
-//                BufferedImageLoader loader = new BufferedImageLoader();
-//                Game.state = Game.STATE.DEAD;
-//                handler.object.clear();
-//                Game.getInstance().loadImageLevel(loader.loadImage("/hell.png"));
+                BufferedImageLoader loader = new BufferedImageLoader();
+                Game.state = Game.STATE.DEAD;
+                handler.object.clear();
+                handler.loadImageLevel(loader.loadImage("/hell.png"));
+                Game.levelNumber = 0;
             } else if(powerUpBlocks.contains(blockCollided.getType())) {
                 handler.removeObject(handler.object.get(ix));
                 gravity = 0.3f;
