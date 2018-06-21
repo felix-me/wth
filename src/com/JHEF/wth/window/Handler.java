@@ -4,6 +4,7 @@ import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
 import com.JHEF.wth.objects.Block;
 import com.JHEF.wth.objects.Flag;
+import com.JHEF.wth.objects.Imp;
 import com.JHEF.wth.objects.Player;
 
 import java.awt.*;
@@ -168,6 +169,12 @@ public class Handler {
                 if (red == 0 && green == 0 && blue == 0) {
                     addObject(new Player(xx * 32, (yy * 32), this, cam, ObjectId.player));
                     System.out.println("xx: " + xx * 32 + "yy: " + yy + 32);
+                }
+                if(red == 255 && green == 100 && blue == 255) {
+                    addObject(new Imp(xx*32,yy*32, this, ObjectId.imp));
+
+
+
                 }
             }
         }

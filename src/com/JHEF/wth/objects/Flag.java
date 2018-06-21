@@ -24,4 +24,18 @@ public class Flag extends GameObject {
     public Rectangle getBounds() {
         return new Rectangle((int)x,(int)y,32,32);
     }
+
+    public Rectangle getBoundsTop() {
+        return null;
+    }
+    public Rectangle getBoundsBottom() {
+        return null;
+    }
+    public Rectangle getBoundsLeft() {
+        return null;
+    }
+    public Rectangle getBoundsRight() {
+        return null;
+    }
+
 }
