@@ -35,7 +35,8 @@ public class Game extends Canvas implements Runnable {
 
     private static Game gameInstance;
 
-    private long timer = System.currentTimeMillis();
+    private boolean muted = false;
+
     public static int levelNumber = 0;
 
     private BufferedImageLoader loader;
@@ -99,7 +100,7 @@ public class Game extends Canvas implements Runnable {
         try {
             sound.playSound("/mainMenuTheme.wav");
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
     }
@@ -134,6 +135,7 @@ public class Game extends Canvas implements Runnable {
         double delta = 0;
         int updates = 0;
         int frames = 0;
+        long timer = System.currentTimeMillis();
         while (running)
         {
             long now = System.nanoTime();
@@ -243,8 +245,12 @@ public class Game extends Canvas implements Runnable {
         return gameInstance;
     }
 
-    public long getTimer() {
-        return timer;
+    public boolean isMuted() {
+        return muted;
+    }
+
+    public void setMuted(boolean muted) {
+        this.muted = muted;
     }
 
     public void restartGame() {

@@ -13,12 +13,14 @@ public class Sound {
 
         public void playSound(String file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
-            currentDir = System.getProperty("user.dir")+"/res";
-            f = new File(currentDir+file);
-            ais = AudioSystem.getAudioInputStream(f);
-            clip = AudioSystem.getClip();
-            clip.open(ais);
-            clip.loop(1000);
+            if (!Game.getInstance().isMuted()) {
+               currentDir = System.getProperty("user.dir")+"/res";
+               f = new File(currentDir+file);
+               ais = AudioSystem.getAudioInputStream(f);
+               clip = AudioSystem.getClip();
+               clip.open(ais);
+               clip.loop(1000);
+            }
 
         }
 
@@ -26,8 +28,4 @@ public class Sound {
             clip.stop();
         }
 
-
-
-
-
-    }
+}
