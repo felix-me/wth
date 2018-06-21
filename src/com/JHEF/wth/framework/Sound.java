@@ -1,5 +1,7 @@
 package com.JHEF.wth.framework;
 
+import com.JHEF.wth.window.Game;
+
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +18,7 @@ public class Sound {
             ais = AudioSystem.getAudioInputStream(f);
             clip = AudioSystem.getClip();
             clip.open(ais);
-            clip.start();
+            clip.loop(1000);
 
         }
 

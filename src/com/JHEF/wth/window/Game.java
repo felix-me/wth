@@ -82,8 +82,14 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(handler));
         this.addMouseListener(new MouseInput());
 
-        SoundCaller sc = new SoundCaller();
-        sc.playGameThemes();
+        // Play Theme Tune
+        Sound sound = new Sound();
+
+        try {
+            sound.playSound("C:\\Users\\User\\IdeaProjects\\wth\\res\\mainMenuTheme.wav");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
 
