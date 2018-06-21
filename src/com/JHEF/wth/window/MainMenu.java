@@ -1,13 +1,7 @@
 package com.JHEF.wth.window;
 
-import com.JHEF.wth.framework.Sound;
-import com.JHEF.wth.objects.Player;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.net.URL;
 
 public class MainMenu {
 
@@ -41,7 +35,6 @@ public class MainMenu {
 
         g.dispose();
     }
-
     private static BufferedImage resize(BufferedImage img, int height, int width) {
         Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -50,6 +43,5 @@ public class MainMenu {
         g2d.dispose();
         return resized;
     }
-
 
 }
