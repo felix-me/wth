@@ -32,6 +32,9 @@ public class Game extends Canvas implements Runnable {
 
     private static Game gameInstance;
 
+
+    private long timer = System.currentTimeMillis();
+
     public Game()
     {
         gameInstance=this;
@@ -205,7 +208,6 @@ public class Game extends Canvas implements Runnable {
         double amountOfTicks = 60.0; // FPS
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
-        long timer = System.currentTimeMillis();
         int updates = 0;
         int frames = 0;
         while (running)
@@ -225,7 +227,8 @@ public class Game extends Canvas implements Runnable {
             if (System.currentTimeMillis() - timer > 1000)
             {
                 timer += 1000;
-                System.out.println("FPS: " + frames + " TICKS: " + updates);
+//                System.out.println("FPS: " + frames + " TICKS: " + updates);
+//                System.out.println("Delta: " + delta + " timer: " + timer);
                 frames = 0;
                 updates = 0;
             }
@@ -311,6 +314,17 @@ public class Game extends Canvas implements Runnable {
 
     public static Game getInstance() {
         return gameInstance;
+    }
+
+    public long getTimer() {
+        return timer;
+    }
+
+    public void restartGame() {
+        BufferedImageLoader loader = new BufferedImageLoader();
+        Game.state = Game.STATE.DEAD;
+        handler.object.clear();
+        Game.getInstance().loadImageLevel(loader.loadImage("/hell.png"));
     }
 
     public static BufferedImage resize(BufferedImage img, int height, int width) {

@@ -45,9 +45,13 @@ public abstract class GameObject
 
     /**
      * getBoundsBottom
-     * returns the collision bound of a player
+     * returns the collision bounds of a given game object
      */
     public abstract Rectangle getBounds();
+    public abstract Rectangle getBoundsTop();
+    public abstract Rectangle getBoundsBottom();
+    public abstract Rectangle getBoundsLeft();
+    public abstract Rectangle getBoundsRight();
 
     public float getX() {
         return x;

@@ -17,6 +17,8 @@ public class Imp extends GameObject {
     private float width = 48, height = 48;
     private float gravity = 0.62f;
 
+    private int prevTime = ((int) System.currentTimeMillis() / 1000);
+
     private Handler handler;
 
     /**
@@ -29,17 +31,28 @@ public class Imp extends GameObject {
     public Imp(float x, float y, Handler handler, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
+        setVelX(-0.5f);
     }
 
     public void tick(LinkedList<GameObject> object) {
         x += velX;
         y += velY;
+        int seconds = ((int) System.currentTimeMillis() / 1000);
+            if ((seconds != prevTime) && (seconds % 2 == 0)) {
+                setVelX(-1* velX);
+            }
 
-        if (falling || jumping) {
-            velY += gravity;
+        if ((seconds != prevTime) && (seconds % 4 == 0)) {
+            setVelY(-10);
         }
 
-        Collision();
+            prevTime = seconds;
+
+            if (falling || jumping) {
+                velY += gravity;
+            }
+
+            Collision();
     }
 
     private void Collision() {
@@ -75,12 +88,6 @@ public class Imp extends GameObject {
 
             }
 
-            else if (tempObj.getId() == ObjectId.player) {
-                if (getBoundsLeft().intersects(tempObj.getBounds()) || getBoundsRight().intersects(tempObj.getBounds())) {
-                    handler.removeObject(tempObj);
-                }
-            }
-
         }
 
     }
@@ -88,21 +95,6 @@ public class Imp extends GameObject {
     public void render(Graphics g) {
         BufferedImage img = Game.resize(tex.imp[0], 48, 48);
         g.drawImage(img,(int)x,(int)y,null);
-
-        Graphics2D g2d = (Graphics2D) g;
-
-        g.setColor(Color.RED);
-
-        g2d.draw(getBoundsBottom());
-
-        g.setColor(Color.BLUE);
-        g2d.draw(getBoundsTop());
-
-        g.setColor(Color.YELLOW);
-        g2d.draw(getBoundsLeft());
-
-        g.setColor(Color.GREEN);
-        g2d.draw(getBoundsRight());
     }
 
     public Rectangle getBounds() {
@@ -110,7 +102,7 @@ public class Imp extends GameObject {
     }
 
     public Rectangle getBoundsTop() {
-        return new Rectangle((int)x + (int)width/2 - (int)(width/2)/3, (int)y + 20, ((int)width/2-10), ((int)height/2)-15);
+        return new Rectangle((int)x + (int)width/2 - (int)(width/2)/3, (int)y + 12, ((int)width/2-10), ((int)height/2)-15);
     }
     public Rectangle getBoundsBottom() {
         return new Rectangle((int)x + (int)width/2 - (int)(width/2)/3, ((int)y + (int)height), ((int)width/2-2), ((int)height/2)-15);

@@ -54,7 +54,6 @@ public class Player extends GameObject {
         } else if(powerUpRemaining != -1) {
             powerUpRemaining--;
         }
-        System.out.println(powerUpRemaining);
         x += velX;
         y += velY;
 
@@ -74,10 +73,7 @@ public class Player extends GameObject {
         if(tempObject instanceof Block) {
             Block blockCollided = (Block) tempObject;
             if(killBlocks.contains(blockCollided.getType())) {
-                BufferedImageLoader loader = new BufferedImageLoader();
-                Game.state = Game.STATE.DEAD;
-                handler.object.clear();
-                Game.getInstance().loadImageLevel(loader.loadImage("/hell.png"));
+                Game.getInstance().restartGame();
             } else if(powerUpBlocks.contains(blockCollided.getType())) {
                 handler.removeObject(handler.object.get(ix));
                 gravity = 0.3f;
@@ -122,6 +118,15 @@ public class Player extends GameObject {
                 }
             }
 
+            else if (tempObj.getId() == ObjectId.imp) {
+                if (getBounds().intersects(tempObj.getBoundsLeft()) || getBounds().intersects(tempObj.getBoundsRight())) {
+                    Game.getInstance().restartGame();
+                }
+                if (getBoundsBottom().intersects(tempObj.getBoundsTop())) {
+                    handler.removeObject(tempObj);
+                }
+            }
+
         }
 
     }
@@ -130,13 +135,12 @@ public class Player extends GameObject {
         if(velX != 0){
             playerWalk.drawAnimation(g,(int)x,(int)y);
         } else {
-
             g.drawImage(tex.player[0], (int) x, (int) y, null);
         }
     }
 
     public Rectangle getBounds() {
-        return new Rectangle((int)x,(int)y,(int)width,(int)height);
+        return new Rectangle((int)x + 5,(int)y+23,24,40);
     }
 
     public Rectangle getBoundsBottom() {
