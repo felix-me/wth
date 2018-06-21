@@ -11,7 +11,7 @@ import java.util.LinkedList;
 
 public class Block extends GameObject {
 
-    Texture tex = Game.getTexture();
+    private Texture tex = Game.getTexture();
     private int type;
     private Animation wingFlap;
 
