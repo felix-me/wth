@@ -1,5 +1,6 @@
 package com.JHEF.wth.menus;
 
+import com.JHEF.wth.utils.GraphicsUtils;
 import com.JHEF.wth.window.BufferedImageLoader;
 import com.JHEF.wth.window.Game;
 
@@ -17,7 +18,7 @@ public class DeathMenu {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
         Image logo = bi.loadImage("/DedGhost.png");
-        BufferedImage image = resize((BufferedImage)logo, 400, 500);
+        BufferedImage image = GraphicsUtils.resize((BufferedImage)logo, 400, 500);
         g.drawImage(image, Game.WIDTH / 2 - 250, 60, null);
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.WHITE);
@@ -38,12 +39,4 @@ public class DeathMenu {
         g.dispose();
     }
 
-    private static BufferedImage resize(BufferedImage img, int height, int width) {
-        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = resized.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
-        g2d.dispose();
-        return resized;
-    }
 }

@@ -8,9 +8,8 @@ import com.JHEF.wth.window.Game;
 import com.JHEF.wth.window.Handler;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-
+import java.util.*;
+import java.util.List;
 
 
 public class Player extends GameObject {
@@ -21,8 +20,9 @@ public class Player extends GameObject {
 
     private Handler handler;
     private Animation playerWalk, playerWalkLeft, playerWithWings, playerWithWingsLeft;
-    private ArrayList<Integer> killBlocks = new ArrayList<>();
-    private ArrayList<Integer> powerUpBlocks = new ArrayList<>();
+    private Animation[] animations;
+    private List<Integer> killBlocks = Arrays.asList(6,7,8,9);
+    private List<Integer> powerUpBlocks = Collections.singletonList(22);
 
     private int powerUpRemaining = -1;
 
@@ -41,13 +41,7 @@ public class Player extends GameObject {
         playerWalkLeft = new Animation(10, tex.player[4], tex.player[5]);
         playerWithWings = new Animation(10,tex.playerWings[0], tex.playerWings[1], tex.playerWings[2]);
         playerWithWingsLeft = new Animation(10,tex.playerWings[3], tex.playerWings[4], tex.playerWings[5]);
-
-
-        killBlocks.add(6);
-        killBlocks.add(7);
-        killBlocks.add(8);
-        killBlocks.add(9);
-        powerUpBlocks.add(22);
+        animations = new Animation[]{playerWalk, playerWalkLeft, playerWithWings, playerWithWingsLeft};
     }
 
     public void tick(LinkedList<GameObject> object) {
@@ -72,10 +66,9 @@ public class Player extends GameObject {
         }
 
         Collision();
-        playerWalk.runAnimation();
-        playerWalkLeft.runAnimation();
-        playerWithWings.runAnimation();
-        playerWithWingsLeft.runAnimation();
+        for (Animation animation : animations) {
+            animation.runAnimation();
+        }
     }
 
     private void doesCollide(GameObject tempObject, int ix) {

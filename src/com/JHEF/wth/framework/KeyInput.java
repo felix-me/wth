@@ -32,24 +32,20 @@ public class KeyInput extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
-        if(keyToChange != -1){
+        if (keyToChange != -1) {
 
-            switch (keyToChange){
+            switch (keyToChange) {
 
                 case 0:
                     left = key;
-
-                    System.out.println("Changed left");
                     break;
 
                 case 1:
                     up = key;
-                    System.out.println("Changed up");
                     break;
 
                 case 2:
                     right = key;
-                    System.out.println("Changed right");
 
             }
 
@@ -85,7 +81,7 @@ public class KeyInput extends KeyAdapter {
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
 
-        for (int i = 0; i < handler.object.size() ; i++) {
+        for (int i = 0; i < handler.object.size(); i++) {
             GameObject tempObj = handler.object.get(i);
 
             if (tempObj.getId() == ObjectId.player) {

@@ -1,5 +1,6 @@
 package com.JHEF.wth.menus;
 
+import com.JHEF.wth.utils.GraphicsUtils;
 import com.JHEF.wth.window.BufferedImageLoader;
 import com.JHEF.wth.window.Game;
 
@@ -19,7 +20,7 @@ public class MainMenu {
         g.setColor(Color.RED);
         g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
         Image logo = bi.loadImage("/logo.png");
-        BufferedImage image = resize((BufferedImage)logo, 200, 680);
+        BufferedImage image = GraphicsUtils.resize((BufferedImage)logo, 200, 680);
         g.drawImage(image, Game.WIDTH / 2 - 320, 15, null);
         Graphics2D g2d = (Graphics2D) g;
 
@@ -37,14 +38,6 @@ public class MainMenu {
         g2d.draw(quitButton);
 
         g.dispose();
-    }
-    private static BufferedImage resize(BufferedImage img, int height, int width) {
-        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = resized.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
-        g2d.dispose();
-        return resized;
     }
 
 }

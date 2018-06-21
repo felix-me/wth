@@ -35,22 +35,22 @@ public class Imp extends GameObject {
         x += velX;
         y += velY;
         int seconds = ((int) System.currentTimeMillis() / 1000);
-            if ((seconds != prevTime) && (seconds % 2 == 0)) {
-                setVelX(-1* velX);
-            }
+        if ((seconds != prevTime) && (seconds % 2 == 0)) {
+            setVelX(-1 * velX);
+        }
 
         if ((seconds != prevTime) && (seconds % 4 == 0)) {
             setVelY(-10);
         }
 
-            prevTime = seconds;
+        prevTime = seconds;
 
-            if (falling || jumping) {
-                float gravity = 0.62f;
-                velY += gravity;
-            }
+        if (falling || jumping) {
+            float gravity = 0.62f;
+            velY += gravity;
+        }
 
-            Collision();
+        Collision();
     }
 
     private void Collision() {
@@ -62,7 +62,7 @@ public class Imp extends GameObject {
             if (tempObj.getId() == ObjectId.block) {
 
                 if (getBoundsTop().intersects(tempObj.getBounds())) {
-                    y = tempObj.getY()+9;
+                    y = tempObj.getY() + 9;
                     velY = 0;
                 }
 
@@ -71,8 +71,7 @@ public class Imp extends GameObject {
                     velY = 0;
                     falling = false;
                     jumping = false;
-                }
-                else {
+                } else {
                     falling = true;
                 }
 
@@ -92,7 +91,7 @@ public class Imp extends GameObject {
 
     public void render(Graphics g) {
         BufferedImage img = Game.resize(tex.imp[0], 48, 48);
-        g.drawImage(img,(int)x,(int)y,null);
+        g.drawImage(img, (int) x, (int) y, null);
     }
 
     public Rectangle getBounds() {
@@ -100,17 +99,18 @@ public class Imp extends GameObject {
     }
 
     public Rectangle getBoundsTop() {
-        return new Rectangle((int)x + (int)width/2 - (int)(width/2)/3, (int)y + 12, ((int)width/2-10), ((int)height/2)-15);
+        return new Rectangle((int) x + (int) width / 2 - (int) (width / 2) / 3, (int) y + 12, ((int) width / 2 - 10), ((int) height / 2) - 15);
     }
+
     public Rectangle getBoundsBottom() {
-        return new Rectangle((int)x + (int)width/2 - (int)(width/2)/3, ((int)y + (int)height), ((int)width/2-2), ((int)height/2)-15);
+        return new Rectangle((int) x + (int) width / 2 - (int) (width / 2) / 3, ((int) y + (int) height), ((int) width / 2 - 2), ((int) height / 2) - 15);
     }
 
     public Rectangle getBoundsLeft() {
-        return new Rectangle((int)x + (int)width/2 - (int)(width/2)/2, (int)y+25, 5, (int)height - 30);
+        return new Rectangle((int) x + (int) width / 2 - (int) (width / 2) / 2, (int) y + 25, 5, (int) height - 30);
     }
 
     public Rectangle getBoundsRight() {
-        return new Rectangle((int)x + (int)width/2 - (int)(width/2)+30, (int)y+25, 5, (int)height - 30);
+        return new Rectangle((int) x + (int) width / 2 - (int) (width / 2) + 30, (int) y + 25, 5, (int) height - 30);
     }
 }

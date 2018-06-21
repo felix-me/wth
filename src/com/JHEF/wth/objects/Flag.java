@@ -21,7 +21,6 @@ public class Flag extends GameObject {
     }
 
     public void render(Graphics g) {
-        g.setColor(Color.RED);
         g.drawImage(tex.levelEnd[0], (int) x, (int) y, null);
     }
 
