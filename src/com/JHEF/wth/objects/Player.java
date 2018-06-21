@@ -26,8 +26,6 @@ public class Player extends GameObject {
     private int powerUpRemaining = -1;
     private Camera cam;
 
-    Texture tex = Game.getTexture();
-
     /**
      * constructor for {@link GameObject}
      *
@@ -84,10 +82,7 @@ public class Player extends GameObject {
         if(tempObject instanceof Block) {
             Block blockCollided = (Block) tempObject;
             if(killBlocks.contains(blockCollided.getType())) {
-                BufferedImageLoader loader = new BufferedImageLoader();
-                Game.state = Game.STATE.DEAD;
-                handler.object.clear();
-                handler.loadImageLevel(loader.loadImage("/hell.png"));
+                Game.getInstance().restartGame();
                 Game.levelNumber = 0;
             } else if(powerUpBlocks.contains(blockCollided.getType())) {
                 handler.removeObject(handler.object.get(ix));
@@ -140,12 +135,20 @@ public class Player extends GameObject {
                 }
             }
 
+            else if (tempObj.getId() == ObjectId.imp) {
+                if (getBounds().intersects(tempObj.getBoundsLeft()) || getBounds().intersects(tempObj.getBoundsRight())) {
+                    Game.getInstance().restartGame();
+                }
+                if (getBoundsBottom().intersects(tempObj.getBoundsTop())) {
+                    handler.removeObject(tempObj);
+                }
+            }
+
         }
 
     }
 
     public void render(Graphics g) {
-        g.setColor(Color.GREEN);
         if(jumping){
 
             if(facing == 1){
@@ -176,20 +179,10 @@ public class Player extends GameObject {
                 } else g.drawImage(tex.player[0], (int) x, (int) y, null);
             }
         }
-
-//        Graphics2D g2d = (Graphics2D) g;
-//
-//        g.setColor(Color.RED);
-//
-//        g2d.draw(getBoundsBottom());
-//        g2d.draw(getBoundsRight());
-//        g2d.draw(getBoundsLeft());
-//        g2d.draw(getBoundsTop());
-
     }
 
     public Rectangle getBounds() {
-        return new Rectangle((int)x,(int)y,(int)width,(int)height);
+        return new Rectangle((int)x + 5,(int)y+23,24,40);
     }
 
     public Rectangle getBoundsBottom() {
