@@ -160,9 +160,6 @@ public class Handler {
                 if (red == 255 && green == 0 && blue == 60) {
                     addObject(new Block(xx * 32, yy * 32, 21, ObjectId.block));
                 }
-                if (red == 255 && green == 255 && blue == 0) {
-                    addObject(new Block(xx * 32, yy * 32, 22, ObjectId.block));
-                }
                 if (red == 0 && green == 0 && blue == 20) {
                     addObject(new Flag(xx * 32, yy * 32, ObjectId.flag));
                 }
@@ -170,11 +167,17 @@ public class Handler {
                     addObject(new Player(xx * 32, (yy * 32), this, cam, ObjectId.player));
                     System.out.println("xx: " + xx * 32 + "yy: " + yy + 32);
                 }
+                int number = (int) (Math.random() * 100);
+                System.out.println(number);
                 if(red == 255 && green == 100 && blue == 255) {
-                    addObject(new Imp(xx*32,yy*32, this, ObjectId.imp));
-
-
-
+                    if(number < 25) {
+                        addObject(new Imp(xx * 32, yy * 32, this, ObjectId.imp));
+                    }
+                }
+                if (red == 255 && green == 255 && blue == 0) {
+                    if(number > 75) {
+                        addObject(new Block(xx * 32, yy * 32, 22, ObjectId.block));
+                    }
                 }
             }
         }

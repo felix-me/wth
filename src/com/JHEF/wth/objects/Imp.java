@@ -31,7 +31,7 @@ public class Imp extends GameObject {
     public Imp(float x, float y, Handler handler, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
-        setVelX(-0.5f);
+        setVelX(0.5f);
     }
 
     public void tick(LinkedList<GameObject> object) {
