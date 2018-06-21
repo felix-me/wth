@@ -16,7 +16,7 @@ public abstract class GameObject
     protected boolean falling = true;
     protected boolean jumping = false;
 
-    public Texture tex = Game.getTexture();
+    protected Texture tex = Game.getTexture();
 
     /**
      * constructor for {@link GameObject}
@@ -66,16 +66,11 @@ public abstract class GameObject
         this.y = y;
     }
 
-    public float getVelX() {
-        return velX;
-    }
-    public float getVelY() {
-        return velY;
-    }
-    public void setVelX(float velX) {
+    protected void setVelX(float velX) {
         this.velX = velX;
     }
-    public void setVelY(float velY) {
+
+    protected void setVelY(float velY) {
         this.velY = velY;
     }
 
@@ -87,12 +82,12 @@ public abstract class GameObject
         this.falling = falling;
     }
 
-    public boolean isJumping() {
+    boolean isJumping() {
         return jumping;
     }
 
-    public void setJumping(boolean jumping) {
-        this.jumping = jumping;
+    void setJumping() {
+        this.jumping = true;
     }
 
     public ObjectId getId() {
