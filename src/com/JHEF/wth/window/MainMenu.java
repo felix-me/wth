@@ -5,12 +5,12 @@ import java.awt.image.BufferedImage;
 
 public class MainMenu {
 
-    public Rectangle playButton = new Rectangle(Game.WIDTH /2 - 60, 200, 120, 55);
-    public Rectangle helpButton = new Rectangle(Game.WIDTH /2 - 60, 280, 125, 55);
-    public Rectangle quitButton = new Rectangle(Game.WIDTH /2 - 60, 440, 120, 55);
-    public Rectangle optionsButton = new Rectangle(Game.WIDTH /2 - 100, 360, 205, 55);
+    private Rectangle playButton = new Rectangle(Game.WIDTH / 2 - 60, 200, 120, 55);
+    private Rectangle helpButton = new Rectangle(Game.WIDTH / 2 - 60, 280, 125, 55);
+    private Rectangle quitButton = new Rectangle(Game.WIDTH / 2 - 60, 440, 120, 55);
+    private Rectangle optionsButton = new Rectangle(Game.WIDTH / 2 - 100, 360, 205, 55);
 
-    BufferedImageLoader bi = new BufferedImageLoader();
+    private BufferedImageLoader bi = new BufferedImageLoader();
 
     public void render(Graphics g) {
         g.setColor(Color.RED);
