@@ -1,5 +1,7 @@
 package com.JHEF.wth.window;
 
+import com.JHEF.wth.framework.Sound;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -12,10 +14,7 @@ public class WinMenu {
 
     public void render(Graphics g) {
         g.setColor(Color.BLUE);
-        g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
-        Image logo = bi.loadImage("/win.jpg");
-        BufferedImage image = resize((BufferedImage)logo, 400, 500);
-        g.drawImage(image, Game.WIDTH / 2 - 250, 60, null);
+        g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);;
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.WHITE);
         Font titleFont = new Font("Rockwell", Font.CENTER_BASELINE, 80);
@@ -24,8 +23,10 @@ public class WinMenu {
 
         Font bodyFnt = new Font("Rockwell", Font.CENTER_BASELINE, 30);
         g.setFont(bodyFnt);
-//        g.drawString("You have escaped from hell and made it to heaven", Game.WIDTH / 2 - 220, 110);
-
+        g.drawString("Level One: "+(Game.levelOne-Game.levelTimer)+" Seconds", Game.WIDTH / 2 - 180, 110);
+        g.drawString("Level Two: "+(Game.levelTwo-Game.levelOne)+" Seconds", Game.WIDTH / 2 - 180, 150);
+        g.drawString("Level Three: "+(Game.levelThree-Game.levelTwo)+" Seconds", Game.WIDTH / 2 - 180, 190);
+        g.drawString("Overall: "+(Game.levelThree-Game.levelTimer)+" Seconds", Game.WIDTH / 2 - 180, 230);
         g.drawString("Reset", resetButton.x+7, resetButton.y+40);
         g.drawString("Main Menu", menuButton.x+12, menuButton.y+40);
         g.setColor(Color.BLACK);

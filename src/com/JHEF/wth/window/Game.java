@@ -27,13 +27,21 @@ public class Game extends Canvas implements Runnable {
 
     private static Game gameInstance;
 
+    public static long levelTimer = System.currentTimeMillis()/1000;
+    public static long levelOne;
+    public static long levelTwo;
+    public static long levelThree;
+  
+    private boolean muted = false;
 
-    private long timer = System.currentTimeMillis();
     public static int levelNumber = 0;
 
     private BufferedImageLoader loader;
     private BufferedImage level;
     private BufferedImage[] background;
+
+    // Play Theme Tune
+    private Sound themeTune = new Sound();
 
     public Game()
     {
@@ -90,14 +98,7 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(keyInput);
         this.addMouseListener(new MouseInput());
 
-        // Play Theme Tune
-        Sound sound = new Sound();
-
-        try {
-            sound.playSound("C:\\Users\\User\\IdeaProjects\\wth\\res\\mainMenuTheme.wav");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        themeTune.playSound("/mainMenuTheme.wav", true);
 
     }
     /**
@@ -128,6 +129,7 @@ public class Game extends Canvas implements Runnable {
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0; // FPS
         double ns = 1000000000 / amountOfTicks;
+        long timer = System.currentTimeMillis();
         double delta = 0;
         int updates = 0;
         int frames = 0;
@@ -162,6 +164,9 @@ public class Game extends Canvas implements Runnable {
     public void tick()
     {
         if(state == STATE.GAME) {
+            if(levelTimer == -1) {
+                levelTimer = System.currentTimeMillis() / 1000;
+            }
             handler.tick();
             for (int i = 0; i < handler.object.size(); i++) {
                 if (handler.object.get(i).getId() == ObjectId.player) {
@@ -240,8 +245,16 @@ public class Game extends Canvas implements Runnable {
         return gameInstance;
     }
 
-    public long getTimer() {
-        return timer;
+    public boolean isMuted() {
+        return muted;
+    }
+
+    public void setMuted(boolean muted) {
+        this.muted = muted;
+    }
+
+    public Sound getThemeTune() {
+        return themeTune;
     }
 
     public static KeyInput getKeyInput() {
@@ -253,6 +266,8 @@ public class Game extends Canvas implements Runnable {
         Game.state = Game.STATE.DEAD;
         handler.object.clear();
         handler.loadImageLevel(loader.loadImage("/hell.png"));
+        Game.levelNumber = 0;
+        Game.levelTimer = -1;
     }
 
     public static BufferedImage resize(BufferedImage img, int height, int width) {

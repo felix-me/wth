@@ -2,6 +2,7 @@ package com.JHEF.wth.window;
 
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
+import com.JHEF.wth.framework.Sound;
 import com.JHEF.wth.objects.Block;
 import com.JHEF.wth.objects.Flag;
 import com.JHEF.wth.objects.Imp;
@@ -25,6 +26,8 @@ public class Handler {
     private BufferedImage level;
     private BufferedImage level2;
     private BufferedImage level3;
+
+    public Sound sound = new Sound();
 
     public Handler(Camera cam) {
         this.cam = cam;
@@ -160,9 +163,6 @@ public class Handler {
                 if (red == 255 && green == 0 && blue == 60) {
                     addObject(new Block(xx * 32, yy * 32, 21, ObjectId.block));
                 }
-                if (red == 255 && green == 255 && blue == 0) {
-                    addObject(new Block(xx * 32, yy * 32, 22, ObjectId.block));
-                }
                 if (red == 0 && green == 0 && blue == 20) {
                     addObject(new Flag(xx * 32, yy * 32, ObjectId.flag));
                 }
@@ -170,11 +170,17 @@ public class Handler {
                     addObject(new Player(xx * 32, (yy * 32), this, cam, ObjectId.player));
                     System.out.println("xx: " + xx * 32 + "yy: " + yy + 32);
                 }
+                int number = (int) (Math.random() * 100);
+                System.out.println(number);
                 if(red == 255 && green == 100 && blue == 255) {
-                    addObject(new Imp(xx*32,yy*32, this, ObjectId.imp));
-
-
-
+                    if(number < 40) {
+                        addObject(new Imp(xx * 32, yy * 32, this, ObjectId.imp));
+                    }
+                }
+                if (red == 255 && green == 255 && blue == 0) {
+                    if(number > 75) {
+                        addObject(new Block(xx * 32, yy * 32, 22, ObjectId.block));
+                    }
                 }
             }
         }
@@ -187,12 +193,22 @@ public class Handler {
         switch (Game.levelNumber)
         {
             case 0:
+                Game.getInstance().getThemeTune().killSound();
+                sound.playSound("/earthTheme.wav", true);
+                Game.levelOne = System.currentTimeMillis()/1000;
                 loadImageLevel(loader.loadImage("/earth.png"));
                 break;
             case 1:
+                sound.killSound();
+                sound.playSound("/heavenTheme.wav", true);
+                Game.levelTwo = System.currentTimeMillis()/1000;
                 loadImageLevel(loader.loadImage("/heaven.png"));
                 break;
             case 2:
+                sound.killSound();
+                sound.playSound("/applause.wav", false);
+                sound.playSound("/winSong.wav", true);
+                Game.levelThree = System.currentTimeMillis()/1000;
                 Game.state = Game.STATE.WON;
                 break;
         }

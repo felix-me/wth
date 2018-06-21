@@ -12,6 +12,7 @@ public class OptionsMenu {
     public Rectangle upArrow = new Rectangle(Game.WIDTH /2 - 150, 390, 350, 55);
 
     public Rectangle backButton = new Rectangle(Game.WIDTH /2 - 50, 450, 100, 55);
+    public static String muteOption = "Mute";
 
     BufferedImageLoader bi = new BufferedImageLoader();
     Image leftArrowImg = bi.loadImage("/left_control.png");
@@ -27,10 +28,9 @@ public class OptionsMenu {
         g.setFont(titleFont);
         g.drawString("Options", Game.WIDTH / 2 - 105, 50);
 
-
         Font btnFnt = new Font("Rockwell", Font.BOLD, 20);
         g.setFont(btnFnt);
-        g.drawString("Mute", muteButton.x+5, muteButton.y + 30);
+        g.drawString(muteOption, muteButton.x+5, muteButton.y+40);
         g.drawImage(leftArrowImg, Game.WIDTH / 2 - 130, 220, null);
         g.drawImage(rightArrowImg, Game.WIDTH / 2 - 130, 300, null);
         g.drawImage(upArrowImg, Game.WIDTH / 2 - 130, 380, null);
