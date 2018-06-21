@@ -2,10 +2,12 @@ package com.JHEF.wth.framework;
 
 import com.JHEF.wth.window.Game;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MouseInput implements MouseListener {
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -60,6 +62,10 @@ public class MouseInput implements MouseListener {
         } else if (Game.state == Game.STATE.OPTIONS) {
             // Back button
             if (mx >= Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50) {
+                if (my >= 200 && my <= 255) {
+//                    Pressed Mute button
+                    Game.getInstance().setMuted(!Game.getInstance().isMuted());
+                }
                 if (my >= 500 && my <= 555) {
                     // Pressed Back Button
                     Game.state = Game.STATE.MENU;
