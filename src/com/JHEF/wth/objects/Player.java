@@ -93,7 +93,7 @@ public class Player extends GameObject {
                 BufferedImageLoader loader = new BufferedImageLoader();
                 Game.state = Game.STATE.DEAD;
                 handler.object.clear();
-                Game.getInstance().loadImageLevel(loader.loadImage("/hell.png"));
+                handler.loadImageLevel(loader.loadImage("/hell.png"));
 
                 Game.getInstance().restartGame();
                 Game.levelNumber = 0;
