@@ -81,19 +81,10 @@ public class Player extends GameObject {
 
     private void doesCollide(GameObject tempObject, int ix) {
         if(tempObject instanceof Block) {
+            Sound sound = new Sound();
             Block blockCollided = (Block) tempObject;
             if(killBlocks.contains(blockCollided.getType())) {
-
-                try {
-                    Sound sound = new Sound();
-                    sound.playSound("C:\\Users\\User\\IdeaProjects\\wth\\res\\devilDeathNoiseConverted.wav");
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                BufferedImageLoader loader = new BufferedImageLoader();
-                Game.state = Game.STATE.DEAD;
-                handler.object.clear();
-                handler.loadImageLevel(loader.loadImage("/hell.png"));
+                sound.playSound("/devilDeathNoiseConverted.wav", false);
 
                 Game.getInstance().restartGame();
 

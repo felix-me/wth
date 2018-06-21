@@ -43,6 +43,9 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage level;
     private BufferedImage[] background;
 
+    // Play Theme Tune
+    private Sound themeTune = new Sound();
+
     public Game()
     {
         gameInstance=this;
@@ -94,14 +97,7 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(handler));
         this.addMouseListener(new MouseInput());
 
-        // Play Theme Tune
-        Sound sound = new Sound();
-
-        try {
-            sound.playSound("/mainMenuTheme.wav");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        themeTune.playSound("/mainMenuTheme.wav", true);
 
     }
     /**
@@ -251,6 +247,10 @@ public class Game extends Canvas implements Runnable {
 
     public void setMuted(boolean muted) {
         this.muted = muted;
+    }
+
+    public Sound getThemeTune() {
+        return themeTune;
     }
 
     public void restartGame() {

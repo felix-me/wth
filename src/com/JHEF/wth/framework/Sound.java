@@ -1,8 +1,11 @@
 package com.JHEF.wth.framework;
 
-import javax.sound.sampled.*;
+import com.JHEF.wth.window.Game;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.File;
-import java.io.IOException;
 
 public class Sound {
 
@@ -11,15 +14,23 @@ public class Sound {
     Clip clip;
     String currentDir;
 
-        public void playSound(String file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        public void playSound(String file, boolean loop) {
 
             if (!Game.getInstance().isMuted()) {
-               currentDir = System.getProperty("user.dir")+"/res";
-               f = new File(currentDir+file);
-               ais = AudioSystem.getAudioInputStream(f);
-               clip = AudioSystem.getClip();
-               clip.open(ais);
-               clip.loop(1000);
+                try {
+                    currentDir = System.getProperty("user.dir") + "/res";
+                    f = new File(currentDir + file);
+                    ais = AudioSystem.getAudioInputStream(f);
+                    clip = AudioSystem.getClip();
+                    clip.open(ais);
+                    if (loop) {
+                        clip.loop(1000);
+                    } else {
+                        clip.start();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         }

@@ -64,7 +64,11 @@ public class MouseInput implements MouseListener {
             if (mx >= Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50) {
                 if (my >= 200 && my <= 255) {
 //                    Pressed Mute button
+                    Game.getInstance().getThemeTune().killSound();
                     Game.getInstance().setMuted(!Game.getInstance().isMuted());
+                    if (!Game.getInstance().isMuted()) {
+                        Game.getInstance().getThemeTune().playSound("/mainMenuTheme.wav", true);
+                    }
                 }
                 if (my >= 500 && my <= 555) {
                     // Pressed Back Button
