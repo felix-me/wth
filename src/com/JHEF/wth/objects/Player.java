@@ -3,13 +3,9 @@ package com.JHEF.wth.objects;
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
 import com.JHEF.wth.framework.Texture;
-import com.JHEF.wth.window.Animation;
-import com.JHEF.wth.window.BufferedImageLoader;
-import com.JHEF.wth.window.Game;
-import com.JHEF.wth.window.Handler;
+import com.JHEF.wth.window.*;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -28,6 +24,7 @@ public class Player extends GameObject {
     private ArrayList<Integer> powerUpBlocks = new ArrayList<>();
 
     private int powerUpRemaining = -1;
+    private Camera cam;
 
     Texture tex = Game.getTexture();
 
@@ -38,9 +35,10 @@ public class Player extends GameObject {
      * @param y  pos y
      * @param id objectId
      */
-    public Player(float x, float y, Handler handler, ObjectId id) {
+    public Player(float x, float y, Handler handler, Camera cam, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
+        this.cam = cam;
 
         playerWalk = new Animation(10, tex.player[1], tex.player[2]);
         playerWalkLeft = new Animation(10, tex.player[4], tex.player[5]);
@@ -86,10 +84,10 @@ public class Player extends GameObject {
         if(tempObject instanceof Block) {
             Block blockCollided = (Block) tempObject;
             if(killBlocks.contains(blockCollided.getType())) {
-                BufferedImageLoader loader = new BufferedImageLoader();
-                Game.state = Game.STATE.DEAD;
-                handler.object.clear();
-                Game.getInstance().loadImageLevel(loader.loadImage("/hell.png"));
+//                BufferedImageLoader loader = new BufferedImageLoader();
+//                Game.state = Game.STATE.DEAD;
+//                handler.object.clear();
+//                Game.getInstance().loadImageLevel(loader.loadImage("/hell.png"));
             } else if(powerUpBlocks.contains(blockCollided.getType())) {
                 handler.removeObject(handler.object.get(ix));
                 gravity = 0.3f;
@@ -131,6 +129,13 @@ public class Player extends GameObject {
                 if (getBoundsLeft().intersects(tempObj.getBounds())) {
                     x = tempObj.getX() + width;
                     doesCollide(tempObj,i);
+                }
+            } else if(tempObj.getId() == ObjectId.flag) {
+                //switch level
+                BufferedImageLoader loader = new BufferedImageLoader();
+                if(getBounds().intersects(tempObj.getBounds())) {
+                    handler.switchLevel();
+                    Game.levelNumber++;
                 }
             }
 
@@ -183,7 +188,7 @@ public class Player extends GameObject {
     }
 
     public Rectangle getBounds() {
-        return null;
+        return new Rectangle((int)x,(int)y,(int)width,(int)height);
     }
 
     public Rectangle getBoundsBottom() {
