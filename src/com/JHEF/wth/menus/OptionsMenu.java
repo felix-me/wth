@@ -1,6 +1,8 @@
-package com.JHEF.wth.window;
+package com.JHEF.wth.menus;
 
 import com.JHEF.wth.framework.KeyInput;
+import com.JHEF.wth.window.BufferedImageLoader;
+import com.JHEF.wth.window.Game;
 
 import java.awt.*;
 

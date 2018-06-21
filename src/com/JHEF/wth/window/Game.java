@@ -1,6 +1,7 @@
 package com.JHEF.wth.window;
 
 import com.JHEF.wth.framework.*;
+import com.JHEF.wth.menus.*;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -26,10 +27,10 @@ public class Game extends Canvas implements Runnable {
 
     private static Game gameInstance;
 
-    static long levelTimer = System.currentTimeMillis() / 1000;
-    static long levelOne;
-    static long levelTwo;
-    static long levelThree;
+    public static long levelTimer = System.currentTimeMillis() / 1000;
+    public static long levelOne;
+    public static long levelTwo;
+    public static long levelThree;
   
     private boolean muted = false;
 

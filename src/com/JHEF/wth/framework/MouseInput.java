@@ -1,7 +1,7 @@
 package com.JHEF.wth.framework;
 
 import com.JHEF.wth.window.Game;
-import com.JHEF.wth.window.OptionsMenu;
+import com.JHEF.wth.menus.OptionsMenu;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
