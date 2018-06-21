@@ -26,6 +26,7 @@ public class Game extends Canvas implements Runnable {
     private OptionsMenu optionsMenu;
     private HelpMenu helpMenu;
     private DeathMenu deadMenu;
+    private WinMenu winMenu;
 
     private static Game gameInstance;
 
@@ -39,7 +40,7 @@ public class Game extends Canvas implements Runnable {
     {
         gameInstance=this;
         loader = new BufferedImageLoader();
-        this.background = new BufferedImage[]{loader.loadImage("/hell_BG.gif"), loader.loadImage("/Earth_background.png"), loader.loadImage("/heaven_background.png")};
+        this.background = new BufferedImage[]{loader.loadImage("/hell_BG.gif"), loader.loadImage("/Earth_background.png"), loader.loadImage("/heaven_background.png"),loader.loadImage("/heaven_background.png")};
     }
 
     // Object
@@ -53,7 +54,8 @@ public class Game extends Canvas implements Runnable {
         MENU,
         HELP,
         OPTIONS,
-        DEAD
+        DEAD,
+        WON
     };
 
     public static STATE state = STATE.MENU;
@@ -78,6 +80,7 @@ public class Game extends Canvas implements Runnable {
         optionsMenu = new OptionsMenu();
         helpMenu = new HelpMenu();
         deadMenu = new DeathMenu();
+        winMenu = new WinMenu();
 
 //        handler.loadImageLevel(level);
 
@@ -207,8 +210,10 @@ public class Game extends Canvas implements Runnable {
             helpMenu.render(g);
         } else if (state == STATE.DEAD) {
             cam = new Camera(0,0);
-
             deadMenu.render(g);
+        } else if(state == STATE.WON) {
+            cam = new Camera(0,0);
+            winMenu.render(g);
         }
 
         g2d.translate(-cam.getX(),-cam.getY()); //end of cam

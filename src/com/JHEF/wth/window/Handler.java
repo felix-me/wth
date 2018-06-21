@@ -186,7 +186,7 @@ public class Handler {
                 loadImageLevel(loader.loadImage("/heaven.png"));
                 break;
             case 2:
-                //game finished
+                Game.state = Game.STATE.WON;
                 break;
         }
     }
