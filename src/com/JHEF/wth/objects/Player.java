@@ -97,9 +97,9 @@ public class Player extends GameObject {
             if (tempObj.getId() == ObjectId.block) {
 
                 if (getBoundsTop().intersects(tempObj.getBounds())) {
-                    y = tempObj.getY()+9;
+                    y = tempObj.getY() + 9;
                     velY = 0;
-                    doesCollide(tempObj,i);
+                    doesCollide(tempObj, i);
                 }
 
                 if (getBoundsBottom().intersects(tempObj.getBounds())) {
@@ -107,7 +107,7 @@ public class Player extends GameObject {
                     velY = 0;
                     falling = false;
                     jumping = false;
-                    doesCollide(tempObj,i);
+                    doesCollide(tempObj, i);
                 }
                 else {
                     falling = true;
@@ -115,12 +115,12 @@ public class Player extends GameObject {
 
                 if (getBoundsRight().intersects(tempObj.getBounds())) {
                     x = tempObj.getX() - width;
-                    doesCollide(tempObj,i);
+                    doesCollide(tempObj, i);
                 }
 
                 if (getBoundsLeft().intersects(tempObj.getBounds())) {
                     x = tempObj.getX() + width;
-                    doesCollide(tempObj,i);
+                    doesCollide(tempObj, i);
                 }
             } else if(tempObj.getId() == ObjectId.flag) {
                 //switch level

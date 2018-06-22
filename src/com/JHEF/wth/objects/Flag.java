@@ -2,15 +2,11 @@ package com.JHEF.wth.objects;
 
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
-import com.JHEF.wth.framework.Texture;
-import com.JHEF.wth.window.Game;
 
 import java.awt.*;
 import java.util.LinkedList;
 
 public class Flag extends GameObject {
-
-    private Texture tex = Game.getTexture();
 
     public Flag(float x, float y, ObjectId id) {
         super(x, y, id);

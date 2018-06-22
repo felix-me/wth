@@ -2,16 +2,13 @@ package com.JHEF.wth.objects;
 
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
-import com.JHEF.wth.framework.Texture;
 import com.JHEF.wth.window.Animation;
-import com.JHEF.wth.window.Game;
 
 import java.awt.*;
 import java.util.LinkedList;
 
 public class Block extends GameObject {
 
-    private Texture tex = Game.getTexture();
     private int type;
     private Animation wingFlap;
 
