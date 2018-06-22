@@ -9,34 +9,33 @@ import java.io.File;
 
 public class Sound {
 
-    File f;
-    AudioInputStream ais;
-    Clip clip;
-    String currentDir;
+    private Clip clip;
 
-        public void playSound(String file, boolean loop) {
+    public void playSound(String file, boolean loop) {
 
-            if (!Game.getInstance().isMuted()) {
-                try {
-                    currentDir = System.getProperty("user.dir") + "/res";
-                    f = new File(currentDir + file);
-                    ais = AudioSystem.getAudioInputStream(f);
-                    clip = AudioSystem.getClip();
-                    clip.open(ais);
-                    if (loop) {
-                        clip.loop(1000);
-                    } else {
-                        clip.start();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+        if (Game.getInstance().isNotMuted()) {
+            try {
+                String currentDir = System.getProperty("user.dir") + "/res";
+                File f = new File(currentDir + file);
+                AudioInputStream ais = AudioSystem.getAudioInputStream(f);
+                clip = AudioSystem.getClip();
+                clip.open(ais);
+                if (loop) {
+                    clip.loop(1000);
+                } else {
+                    clip.start();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
         }
 
-        public void killSound() {
+    }
+
+    public void killSound() {
+        if(clip != null) {
             clip.stop();
         }
+    }
 
 }

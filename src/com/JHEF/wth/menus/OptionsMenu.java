@@ -1,30 +1,32 @@
-package com.JHEF.wth.window;
+package com.JHEF.wth.menus;
 
 import com.JHEF.wth.framework.KeyInput;
+import com.JHEF.wth.window.BufferedImageLoader;
+import com.JHEF.wth.window.Game;
 
 import java.awt.*;
 
 public class OptionsMenu {
 
-    public Rectangle muteButton = new Rectangle(Game.WIDTH /2 - 50, 150, 100, 55);
-    public Rectangle leftArrow = new Rectangle(Game.WIDTH /2 - 150, 230, 350, 55);
-    public Rectangle rightArrow = new Rectangle(Game.WIDTH /2 - 150, 310, 350, 55);
-    public Rectangle upArrow = new Rectangle(Game.WIDTH /2 - 150, 390, 350, 55);
+    private Rectangle muteButton = new Rectangle(Game.WIDTH / 2 - 50, 150, 100, 55);
+    private Rectangle leftArrow = new Rectangle(Game.WIDTH / 2 - 150, 230, 350, 55);
+    private Rectangle rightArrow = new Rectangle(Game.WIDTH / 2 - 150, 310, 350, 55);
+    private Rectangle upArrow = new Rectangle(Game.WIDTH / 2 - 150, 390, 350, 55);
 
-    public Rectangle backButton = new Rectangle(Game.WIDTH /2 - 50, 450, 100, 55);
+    private Rectangle backButton = new Rectangle(Game.WIDTH / 2 - 50, 450, 100, 55);
     public static String muteOption = "Mute";
 
-    BufferedImageLoader bi = new BufferedImageLoader();
-    Image leftArrowImg = bi.loadImage("/left_control.png");
-    Image rightArrowImg = bi.loadImage("/right_control.png");
-    Image upArrowImg = bi.loadImage("/up_control.png");
+    private BufferedImageLoader bi = new BufferedImageLoader();
+    private Image leftArrowImg = bi.loadImage("/left_control.png");
+    private Image rightArrowImg = bi.loadImage("/right_control.png");
+    private Image upArrowImg = bi.loadImage("/up_control.png");
 
     public void render(Graphics g) {
         g.setColor(Color.RED);
         g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.BLACK);
-        Font titleFont = new Font("Rockwell", Font.CENTER_BASELINE, 50);
+        Font titleFont = new Font("Rockwell", Font.BOLD, 50);
         g.setFont(titleFont);
         g.drawString("Options", Game.WIDTH / 2 - 105, 50);
 

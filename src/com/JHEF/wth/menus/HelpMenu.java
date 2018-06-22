@@ -1,21 +1,23 @@
-package com.JHEF.wth.window;
+package com.JHEF.wth.menus;
+
+import com.JHEF.wth.window.Game;
 
 import java.awt.*;
 
 public class HelpMenu {
 
-    public Rectangle backButton = new Rectangle(Game.WIDTH /2 - 50, 520, 100, 55);
+    private Rectangle backButton = new Rectangle(Game.WIDTH / 2 - 50, 520, 100, 55);
 
     public void render(Graphics g) {
         g.setColor(Color.RED);
         g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.BLACK);
-        Font titleFont = new Font("Rockwell", Font.CENTER_BASELINE, 50);
+        Font titleFont = new Font("Rockwell", Font.BOLD, 50);
         g.setFont(titleFont);
         g.drawString("Instructions", Game.WIDTH / 2 - 150, 100);
 
-        Font bodyFnt = new Font("Rockwell", Font.CENTER_BASELINE, 30);
+        Font bodyFnt = new Font("Rockwell", Font.BOLD, 30);
         g.setFont(bodyFnt);
         g.drawString("-> Use Keys to move Ghost through the map", Game.WIDTH / 2 - 350, 150);
         g.drawString("-> Avoid obstacles and enemies", Game.WIDTH / 2 - 350, 200);

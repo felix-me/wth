@@ -3,29 +3,28 @@ package com.JHEF.wth.objects;
 import com.JHEF.wth.framework.GameObject;
 import com.JHEF.wth.framework.ObjectId;
 import com.JHEF.wth.framework.Sound;
-import com.JHEF.wth.framework.Texture;
-import com.JHEF.wth.window.*;
+import com.JHEF.wth.window.Animation;
+import com.JHEF.wth.window.Game;
+import com.JHEF.wth.window.Handler;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-
+import java.util.*;
+import java.util.List;
 
 
 public class Player extends GameObject {
 
     private float width = 32, height = 64;
     private float gravity = 0.62f;
-    private final float MAX_SPEED = 7;
     private int facing = 1;
 
     private Handler handler;
     private Animation playerWalk, playerWalkLeft, playerWithWings, playerWithWingsLeft;
-    private ArrayList<Integer> killBlocks = new ArrayList<>();
-    private ArrayList<Integer> powerUpBlocks = new ArrayList<>();
+    private Animation[] animations;
+    private List<Integer> killBlocks = Arrays.asList(6,7,8,9);
+    private List<Integer> powerUpBlocks = Collections.singletonList(22);
 
     private int powerUpRemaining = -1;
-    private Camera cam;
 
     /**
      * constructor for {@link GameObject}
@@ -34,22 +33,15 @@ public class Player extends GameObject {
      * @param y  pos y
      * @param id objectId
      */
-    public Player(float x, float y, Handler handler, Camera cam, ObjectId id) {
+    public Player(float x, float y, Handler handler, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
-        this.cam = cam;
 
         playerWalk = new Animation(10, tex.player[1], tex.player[2]);
         playerWalkLeft = new Animation(10, tex.player[4], tex.player[5]);
         playerWithWings = new Animation(10,tex.playerWings[0], tex.playerWings[1], tex.playerWings[2]);
         playerWithWingsLeft = new Animation(10,tex.playerWings[3], tex.playerWings[4], tex.playerWings[5]);
-
-
-        killBlocks.add(6);
-        killBlocks.add(7);
-        killBlocks.add(8);
-        killBlocks.add(9);
-        powerUpBlocks.add(22);
+        animations = new Animation[]{playerWalk, playerWalkLeft, playerWithWings, playerWithWingsLeft};
     }
 
     public void tick(LinkedList<GameObject> object) {
@@ -67,28 +59,27 @@ public class Player extends GameObject {
         if (falling || jumping) {
             velY += gravity;
 
+            float MAX_SPEED = 7;
             if (velY > MAX_SPEED) {
                 velY = MAX_SPEED;
             }
         }
 
-        Collision(object);
-        playerWalk.runAnimation();
-        playerWalkLeft.runAnimation();
-        playerWithWings.runAnimation();
-        playerWithWingsLeft.runAnimation();
+        Collision();
+        for (Animation animation : animations) {
+            animation.runAnimation();
+        }
     }
 
     private void doesCollide(GameObject tempObject, int ix) {
         if(tempObject instanceof Block) {
-            Sound sound = new Sound();
             Block blockCollided = (Block) tempObject;
             if(killBlocks.contains(blockCollided.getType())) {
+                Sound sound = new Sound();
                 handler.sound.killSound();
+                Game.getInstance().themeTune.killSound();
                 sound.playSound("/devilDeathNoiseConverted.wav", false);
-
                 Game.getInstance().restartGame();
-
             } else if(powerUpBlocks.contains(blockCollided.getType())) {
                 handler.removeObject(handler.object.get(ix));
                 gravity = 0.3f;
@@ -97,7 +88,7 @@ public class Player extends GameObject {
         }
     }
 
-    private void Collision(LinkedList<GameObject> object) {
+    private void Collision() {
 
         for (int i = 0; i < handler.object.size(); i++) {
 
@@ -106,9 +97,9 @@ public class Player extends GameObject {
             if (tempObj.getId() == ObjectId.block) {
 
                 if (getBoundsTop().intersects(tempObj.getBounds())) {
-                    y = tempObj.getY()+9;
+                    y = tempObj.getY() + 9;
                     velY = 0;
-                    doesCollide(tempObj,i);
+                    doesCollide(tempObj, i);
                 }
 
                 if (getBoundsBottom().intersects(tempObj.getBounds())) {
@@ -116,7 +107,7 @@ public class Player extends GameObject {
                     velY = 0;
                     falling = false;
                     jumping = false;
-                    doesCollide(tempObj,i);
+                    doesCollide(tempObj, i);
                 }
                 else {
                     falling = true;
@@ -124,16 +115,15 @@ public class Player extends GameObject {
 
                 if (getBoundsRight().intersects(tempObj.getBounds())) {
                     x = tempObj.getX() - width;
-                    doesCollide(tempObj,i);
+                    doesCollide(tempObj, i);
                 }
 
                 if (getBoundsLeft().intersects(tempObj.getBounds())) {
                     x = tempObj.getX() + width;
-                    doesCollide(tempObj,i);
+                    doesCollide(tempObj, i);
                 }
             } else if(tempObj.getId() == ObjectId.flag) {
                 //switch level
-                BufferedImageLoader loader = new BufferedImageLoader();
                 if(getBounds().intersects(tempObj.getBounds())) {
                     handler.switchLevel();
                     Game.levelNumber++;
@@ -142,6 +132,10 @@ public class Player extends GameObject {
 
             else if (tempObj.getId() == ObjectId.imp) {
                 if (getBounds().intersects(tempObj.getBoundsLeft()) || getBounds().intersects(tempObj.getBoundsRight())) {
+                    Sound sound = new Sound();
+                    handler.sound.killSound();
+                    Game.getInstance().themeTune.killSound();
+                    sound.playSound("/devilDeathNoiseConverted.wav", false);
                     Game.getInstance().restartGame();
                 }
                 if (getBoundsBottom().intersects(tempObj.getBoundsTop())) {

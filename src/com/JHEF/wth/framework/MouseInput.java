@@ -1,12 +1,16 @@
 package com.JHEF.wth.framework;
 
+import com.JHEF.wth.objects.Player;
 import com.JHEF.wth.window.Game;
-import com.JHEF.wth.window.OptionsMenu;
+import com.JHEF.wth.menus.OptionsMenu;
+import com.JHEF.wth.window.Handler;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MouseInput implements MouseListener {
+
+    Sound sound = new Sound();
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -65,8 +69,8 @@ public class MouseInput implements MouseListener {
                 if (my >= 150 && my <= 205) {
 //                    Pressed Mute button
                     Game.getInstance().getThemeTune().killSound();
-                    Game.getInstance().setMuted(!Game.getInstance().isMuted());
-                    if (!Game.getInstance().isMuted()) {
+                    Game.getInstance().setMuted(Game.getInstance().isNotMuted());
+                    if (Game.getInstance().isNotMuted()) {
                         Game.getInstance().getThemeTune().playSound("/mainMenuTheme.wav", true);
                         OptionsMenu.muteOption = "Mute";
                     } else {
@@ -99,6 +103,9 @@ public class MouseInput implements MouseListener {
             if (mx >= Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50) {
                 if (my >= 400 && my <= 455) {
                     // Pressed Back Button
+                    Game.getInstance().getThemeTune().killSound();
+                    Game.getInstance().getHandler().getSound().killSound(); // Kill level sound
+                    sound.playSound("/mainMenuTheme.wav", true);
                     Game.state = Game.STATE.GAME;
                 }
             }

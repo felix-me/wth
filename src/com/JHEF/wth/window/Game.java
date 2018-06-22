@@ -1,6 +1,7 @@
 package com.JHEF.wth.window;
 
 import com.JHEF.wth.framework.*;
+import com.JHEF.wth.menus.*;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -15,7 +16,6 @@ import java.awt.image.BufferedImage;
 public class Game extends Canvas implements Runnable {
 
     private boolean running = false;
-    private Thread thread;
 
     public static int WIDTH, HEIGHT;
 
@@ -27,7 +27,7 @@ public class Game extends Canvas implements Runnable {
 
     private static Game gameInstance;
 
-    public static long levelTimer = System.currentTimeMillis()/1000;
+    public static long levelTimer = System.currentTimeMillis() / 1000;
     public static long levelOne;
     public static long levelTwo;
     public static long levelThree;
@@ -36,39 +36,23 @@ public class Game extends Canvas implements Runnable {
 
     public static int levelNumber = 0;
 
-    private BufferedImageLoader loader;
-    private BufferedImage level;
     private BufferedImage[] background;
 
     // Play Theme Tune
-    private Sound themeTune = new Sound();
+    public Sound themeTune = new Sound();
 
+    private static Texture tex;
+
+    // Object
+    private Handler handler;
+
+    private Camera cam;
     public Game()
     {
         gameInstance=this;
-        loader = new BufferedImageLoader();
-        this.background = new BufferedImage[]{loader.loadImage("/hell_BG.gif"), loader.loadImage("/Earth_background.png"), loader.loadImage("/heaven_background.png"),loader.loadImage("/heaven_background.png")};
+        BufferedImageLoader loader = new BufferedImageLoader();
+        this.background = new BufferedImage[]{loader.loadImage("/hell_BG.gif"), loader.loadImage("/Earth_background.png"), loader.loadImage("/heaven_background.png"), loader.loadImage("/heaven_background.png")};
     }
-
-    // Object
-    Handler handler;
-
-    private static KeyInput keyInput;
-
-    Camera cam;
-    static Texture tex;
-
-    // Game states
-    public enum STATE{
-        GAME,
-        MENU,
-        HELP,
-        OPTIONS,
-        DEAD,
-        WON
-    };
-
-    public static STATE state = STATE.MENU;
 
     private void init()
     {
@@ -79,7 +63,7 @@ public class Game extends Canvas implements Runnable {
         tex = new Texture();
 
         BufferedImageLoader loader = new BufferedImageLoader();
-        level = loader.loadImage("/hell.png");
+        BufferedImage level = loader.loadImage("/hell.png");
 
         cam = new Camera(0,0);
         handler = new Handler(cam);
@@ -91,7 +75,7 @@ public class Game extends Canvas implements Runnable {
         helpMenu = new HelpMenu();
         deadMenu = new DeathMenu();
         winMenu = new WinMenu();
-        keyInput = new KeyInput(handler);
+        KeyInput keyInput = new KeyInput(handler);
 
 //        handler.loadImageLevel(level);
 
@@ -101,6 +85,9 @@ public class Game extends Canvas implements Runnable {
         themeTune.playSound("/mainMenuTheme.wav", true);
 
     }
+
+    public static STATE state = STATE.MENU;
+
     /**
      * Handles all instances when game is started.
      *
@@ -108,15 +95,19 @@ public class Game extends Canvas implements Runnable {
      */
     public synchronized void start()
     {
-        /**
-         * Make sure that thread is not already running
+        /*
+          Make sure that thread is not already running
          */
         if (running)
             return;
 
         running = true;
-        thread = new Thread(this);
+        Thread thread = new Thread(this);
         thread.start();
+    }
+
+    public boolean isNotMuted() {
+        return !muted;
     }
 
     /**
@@ -131,8 +122,6 @@ public class Game extends Canvas implements Runnable {
         double ns = 1000000000 / amountOfTicks;
         long timer = System.currentTimeMillis();
         double delta = 0;
-        int updates = 0;
-        int frames = 0;
         while (running)
         {
             long now = System.nanoTime();
@@ -141,19 +130,15 @@ public class Game extends Canvas implements Runnable {
             while (delta >= 1)
             {
                 tick();
-                updates++;
                 delta--;
             }
             render();
-            frames++;
 
             if (System.currentTimeMillis() - timer > 1000)
             {
                 timer += 1000;
 //                System.out.println("FPS: " + frames + " TICKS: " + updates);
 //                System.out.println("Delta: " + delta + " timer: " + timer);
-                frames = 0;
-                updates = 0;
             }
         }
     }
@@ -245,8 +230,14 @@ public class Game extends Canvas implements Runnable {
         return gameInstance;
     }
 
-    public boolean isMuted() {
-        return muted;
+    // Game states
+    public enum STATE {
+        GAME,
+        MENU,
+        HELP,
+        OPTIONS,
+        DEAD,
+        WON
     }
 
     public void setMuted(boolean muted) {
@@ -257,8 +248,8 @@ public class Game extends Canvas implements Runnable {
         return themeTune;
     }
 
-    public static KeyInput getKeyInput() {
-        return keyInput;
+    public Handler getHandler() {
+        return handler;
     }
 
     public void restartGame() {

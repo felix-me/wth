@@ -20,9 +20,7 @@ public class Animation {
     public Animation(int speed, BufferedImage... args){
         this.speed = speed;
         images = new BufferedImage[args.length];
-        for(int i = 0; i <args.length;i++){
-            images[i] = args[i];
-        }
+        System.arraycopy(args, 0, images, 0, args.length);
         frames = args.length;
 
 
@@ -50,11 +48,6 @@ public class Animation {
     public void drawAnimation(Graphics g, int x, int y){
 
         g.drawImage(currentImg,x,y,null);
-    }
-
-    public void drawAnimation(Graphics g, int x, int y, int scaleX, int scaleY){
-
-        g.drawImage(currentImg,x,y,scaleX, scaleY,null);
     }
 
 }

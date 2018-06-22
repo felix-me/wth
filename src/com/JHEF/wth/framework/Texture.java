@@ -5,15 +5,8 @@ import com.JHEF.wth.window.BufferedImageLoader;
 import java.awt.image.BufferedImage;
 
 public class Texture {
-  
-    SpriteSheet bs, ps, is, pus, gw, le;
-    private BufferedImage block_sheet = null;
-    private BufferedImage player_sheet = null;
-    private BufferedImage imp_sheet = null;
 
-    private BufferedImage powerup_sheet = null;
-    private BufferedImage wings_sheet = null;
-    private BufferedImage level_end = null;
+    private SpriteSheet bs, ps, is, pus, gw, le;
 
     public BufferedImage[] block = new BufferedImage[24];
     public BufferedImage[] player = new BufferedImage[11];
@@ -26,6 +19,12 @@ public class Texture {
 
         BufferedImageLoader loader = new BufferedImageLoader();
 
+        BufferedImage block_sheet = null;
+        BufferedImage player_sheet = null;
+        BufferedImage imp_sheet = null;
+        BufferedImage powerup_sheet = null;
+        BufferedImage wings_sheet = null;
+        BufferedImage level_end = null;
         try {
             block_sheet = loader.loadImage("/WTH_TEXTURES.png");
             player_sheet = loader.loadImage("/ghosts.png");

@@ -4,12 +4,11 @@ import com.JHEF.wth.window.Handler;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 public class KeyInput extends KeyAdapter {
 
-    Handler handler;
-    public static int keyToChange = -1;
+    static int keyToChange = -1;
+    private Handler handler;
     private static int right = KeyEvent.VK_D;
     private static int left = KeyEvent.VK_A;
     private static int up = KeyEvent.VK_W;
@@ -33,28 +32,24 @@ public class KeyInput extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
-        if(keyToChange != -1){
+        if (keyToChange != -1) {
 
-            switch (keyToChange){
+            switch (keyToChange) {
 
                 case 0:
-                    this.left = key;
-
-                    System.out.println("Changed left");
+                    left = key;
                     break;
 
                 case 1:
-                    this.up = key;
-                    System.out.println("Changed up");
+                    up = key;
                     break;
 
                 case 2:
-                    this.right = key;
-                    System.out.println("Changed right");
+                    right = key;
 
             }
 
-            this.keyToChange = -1;
+            keyToChange = -1;
         } else {
 
 
@@ -63,7 +58,7 @@ public class KeyInput extends KeyAdapter {
 
                 if (tempObj.getId() == ObjectId.player) {
                     if (key == up && !tempObj.isJumping()) {
-                        tempObj.setJumping(true);
+                        tempObj.setJumping();
                         tempObj.setVelY(-10);
                     }
                     if (key == left) {
@@ -86,7 +81,7 @@ public class KeyInput extends KeyAdapter {
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
 
-        for (int i = 0; i < handler.object.size() ; i++) {
+        for (int i = 0; i < handler.object.size(); i++) {
             GameObject tempObj = handler.object.get(i);
 
             if (tempObj.getId() == ObjectId.player) {
@@ -101,22 +96,5 @@ public class KeyInput extends KeyAdapter {
                 }
             }
         }
-    }
-
-    public void setControls(String control){
-
-        int key = 1;
-
-        System.out.println("Being Called");
-
-        try {
-            System.out.println(System.in.read());
-            key = System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-
     }
 }
