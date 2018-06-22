@@ -67,7 +67,7 @@ public class Imp extends GameObject {
                 }
 
                 if (getBoundsBottom().intersects(tempObj.getBounds())) {
-                    y = tempObj.getY() - height;
+                    y = tempObj.getY() - height + 1;
                     velY = 0;
                     falling = false;
                     jumping = false;
@@ -99,11 +99,11 @@ public class Imp extends GameObject {
     }
 
     public Rectangle getBoundsTop() {
-        return new Rectangle((int) x + (int) width / 2 - (int) (width / 2) / 3, (int) y + 12, ((int) width / 2 - 10), ((int) height / 2) - 15);
+        return new Rectangle((int) x + (int) width / 2 - (int) (width / 2) / 2, (int) y + 16, ((int) width / 2), ((int) height / 2) - 20);
     }
 
     public Rectangle getBoundsBottom() {
-        return new Rectangle((int) x + (int) width / 2 - (int) (width / 2) / 3, ((int) y + (int) height), ((int) width / 2 - 2), ((int) height / 2) - 15);
+        return new Rectangle((int) x + (int) width / 2 - (int) (width / 2) / 2, ((int) y + (int) height - 3), ((int) width / 2), ((int) height / 2) - 22);
     }
 
     public Rectangle getBoundsLeft() {
