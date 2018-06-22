@@ -73,14 +73,13 @@ public class Player extends GameObject {
 
     private void doesCollide(GameObject tempObject, int ix) {
         if(tempObject instanceof Block) {
-            Sound sound = new Sound();
             Block blockCollided = (Block) tempObject;
             if(killBlocks.contains(blockCollided.getType())) {
+                Sound sound = new Sound();
                 handler.sound.killSound();
                 Game.getInstance().themeTune.killSound();
                 sound.playSound("/devilDeathNoiseConverted.wav", false);
                 Game.getInstance().restartGame();
-
             } else if(powerUpBlocks.contains(blockCollided.getType())) {
                 handler.removeObject(handler.object.get(ix));
                 gravity = 0.3f;
@@ -133,6 +132,10 @@ public class Player extends GameObject {
 
             else if (tempObj.getId() == ObjectId.imp) {
                 if (getBounds().intersects(tempObj.getBoundsLeft()) || getBounds().intersects(tempObj.getBoundsRight())) {
+                    Sound sound = new Sound();
+                    handler.sound.killSound();
+                    Game.getInstance().themeTune.killSound();
+                    sound.playSound("/devilDeathNoiseConverted.wav", false);
                     Game.getInstance().restartGame();
                 }
                 if (getBoundsBottom().intersects(tempObj.getBoundsTop())) {
