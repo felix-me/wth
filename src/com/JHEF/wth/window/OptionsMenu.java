@@ -40,7 +40,7 @@ public class OptionsMenu {
         g.drawString("Current Control is: " + (KeyInput.getUp()), upArrow.x+110, upArrow.y + 30);
         g.drawString("To change controls click on the icon and press desired key", Game.WIDTH / 2 - 285, 100);
         g.drawString("Back", backButton.x+5, backButton.y + 30);
-        g.setColor(Color.RED);
+        g.setColor(Color.BLACK);
         g2d.draw(muteButton);
         g2d.draw(leftArrow);
         g2d.draw(rightArrow);
