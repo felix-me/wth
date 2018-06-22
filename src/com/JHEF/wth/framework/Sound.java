@@ -14,26 +14,28 @@ public class Sound {
     public void playSound(String file, boolean loop) {
 
         if (Game.getInstance().isNotMuted()) {
-                try {
-                    String currentDir = System.getProperty("user.dir") + "/res";
-                    File f = new File(currentDir + file);
-                    AudioInputStream ais = AudioSystem.getAudioInputStream(f);
-                    clip = AudioSystem.getClip();
-                    clip.open(ais);
-                    if (loop) {
-                        clip.loop(1000);
-                    } else {
-                        clip.start();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+            try {
+                String currentDir = System.getProperty("user.dir") + "/res";
+                File f = new File(currentDir + file);
+                AudioInputStream ais = AudioSystem.getAudioInputStream(f);
+                clip = AudioSystem.getClip();
+                clip.open(ais);
+                if (loop) {
+                    clip.loop(1000);
+                } else {
+                    clip.start();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
         }
 
-        public void killSound() {
+    }
+
+    public void killSound() {
+        if(clip != null) {
             clip.stop();
         }
+    }
 
 }

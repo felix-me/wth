@@ -83,8 +83,6 @@ public class Handler {
 
         for (int xx = 0; xx < h; xx++) {
             for (int yy = 0; yy < w; yy++) {
-                System.out.println(xx);
-                System.out.println(yy);
                 int pixel = image.getRGB(xx, yy);
                 int red = (pixel >> 16) & 0xff;
                 int green = (pixel >> 8) & 0xff;

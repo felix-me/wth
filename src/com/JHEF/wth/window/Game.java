@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage[] background;
 
     // Play Theme Tune
-    private Sound themeTune = new Sound();
+    public Sound themeTune = new Sound();
     private static Texture tex;
     // Object
     private Handler handler;
