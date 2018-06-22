@@ -40,7 +40,9 @@ public class Game extends Canvas implements Runnable {
 
     // Play Theme Tune
     public Sound themeTune = new Sound();
+
     private static Texture tex;
+
     // Object
     private Handler handler;
 
@@ -244,6 +246,10 @@ public class Game extends Canvas implements Runnable {
 
     public Sound getThemeTune() {
         return themeTune;
+    }
+
+    public Handler getHandler() {
+        return handler;
     }
 
     public void restartGame() {

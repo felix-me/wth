@@ -202,5 +202,9 @@ public class Handler {
         }
     }
 
+    public Sound getSound() {
+        return sound;
+    }
+
 
 }
