@@ -66,7 +66,7 @@ public class MouseInput implements MouseListener {
         } else if (Game.state == Game.STATE.OPTIONS) {
             // Back button
             if (mx >= Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50) {
-                if (my >= 450 && my <= 505) {
+                if (my >= 150 && my <= 205) {
 //                    Pressed Mute button
                     Game.getInstance().getThemeTune().killSound();
                     Game.getInstance().setMuted(Game.getInstance().isNotMuted());
@@ -77,7 +77,7 @@ public class MouseInput implements MouseListener {
                         OptionsMenu.muteOption = "Unmute";
                     }
                 }
-                if (my >= 500 && my <= 555) {
+                if (my >= 450 && my <= 505) {
                     // Pressed Back Button
                     Game.state = Game.STATE.MENU;
 
